@@ -19,7 +19,6 @@
         "libs/features/authentication/src/index.ts"
       ],
       "@access-control-panel/core": ["libs/core/src/index.ts"],
-      "@access-control-panel/products": ["libs/products/src/index.ts"],
       "@access-control-panel/role-management": [
         "libs/features/role-management/src/index.ts"
       ],
