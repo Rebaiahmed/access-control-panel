@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve access-control-panel"
+    "start": "nx serve access-control-panel",
+    "json-server": "json-server --watch tools/json-server/db.json --port 3333"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +20,7 @@
     "@ngrx/effects": "^19.2.0",
     "@ngrx/signals": "^19.2.0",
     "@ngrx/store": "^19.2.0",
+    "json-server-auth": "^2.1.0",
     "rxjs": "~7.8.0",
     "zone.js": "~0.15.0"
   },
@@ -55,6 +57,7 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-preset-angular": "~14.4.0",
+    "json-server": "^1.0.0-beta.3",
     "nx": "21.0.3",
     "postcss": "^8.5.3",
     "prettier": "^2.6.2",
