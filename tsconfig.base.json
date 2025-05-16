@@ -22,6 +22,7 @@
       "@access-control-panel/role-management": [
         "libs/features/role-management/src/index.ts"
       ],
+      "@access-control-panel/ui": ["libs/shared/ui/src/index.ts"],
       "@access-control-panel/user-management": [
         "libs/features/user-management/src/index.ts"
       ]
