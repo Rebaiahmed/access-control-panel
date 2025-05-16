@@ -2,7 +2,9 @@
   "name": "@access-control-panel/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx serve access-control-panel"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~19.2.0",
