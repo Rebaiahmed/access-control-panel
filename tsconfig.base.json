@@ -19,8 +19,16 @@
         "libs/features/authentication/src/index.ts"
       ],
       "@access-control-panel/core": ["libs/core/src/index.ts"],
+      "@access-control-panel/home": ["libs/features/home/src/index.ts"],
+      "@access-control-panel/navbar": [
+        "libs/shared/ui/layout/navbar/src/index.ts"
+      ],
+      "@access-control-panel/products": ["libs/products/src/index.ts"],
       "@access-control-panel/role-management": [
         "libs/features/role-management/src/index.ts"
+      ],
+      "@access-control-panel/sidebar": [
+        "libs/shared/ui/layout/sidebar/src/index.ts"
       ],
       "@access-control-panel/ui": ["libs/shared/ui/src/index.ts"],
       "@access-control-panel/user-management": [

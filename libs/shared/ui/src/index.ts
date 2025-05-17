@@ -1,1 +1,1 @@
-export * from './lib/ui/ui.component';
+export * from '../layout/footer/footer.component';

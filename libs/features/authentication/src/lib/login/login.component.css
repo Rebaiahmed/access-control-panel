@@ -1,0 +1,9 @@
+.login-container {
+    height: 100vh;
+  }
+  
+  mat-card {
+    width: 400px;
+    padding: 24px;
+  }
+  
