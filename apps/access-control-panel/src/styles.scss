@@ -1,25 +1,24 @@
-@use '@angular/material' as mat;
+@use '@angular/material' as mat; // Make sure this is at the top of your Sass file
 
+// Include the base styles for Angular Material. This should only be included once.
 @include mat.core();
 
-$primary-palette: mat.define-palette(mat.$indigo-palette);
-$accent-palette: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$warn-palette: mat.define-palette(mat.$red-palette);
+// Define your primary, accent, and warn palettes using m2-define-palette
+$primary-palette: mat.m2-define-palette(mat.$m2-indigo-palette);
+$accent-palette: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400); // Example with custom hues
+$warn-palette: mat.m2-define-palette(mat.$m2-red-palette);
 
-$theme: mat.define-light-theme((
+// Define your theme using m2-define-light-theme or m2-define-dark-theme
+$my-app-theme: mat.m2-define-light-theme((
   color: (
     primary: $primary-palette,
     accent: $accent-palette,
     warn: $warn-palette,
   ),
-  typography: mat.define-typography-config(),
-  density: 0,
+  // Optional: Define typography and density if you need custom settings for M2
+  // typography: mat.m2-define-typography-config(),
+  // density: 0,
 ));
 
-@include mat.all-component-themes($theme);
-
-html, body {
-  height: 100%;
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+// Include the theme styles for all components
+@include mat.all-component-themes($my-app-theme);
