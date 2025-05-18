@@ -7,7 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '@access-control-panel/core';
+import { AuthService } from '../../services/auth.service';
+import { AuthStore } from '../../services/auth.store.service';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class LoginComponent {
 
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private authStore = inject(AuthStore);
   private router = inject(Router);
 
   loginForm: FormGroup = this.fb.group({

@@ -3,7 +3,7 @@
     {
       "id": 1,
       "username": "superadmin",
-      "password": "admin123",
+      "password": "admin",
       "role": "superadmin"
     }
   ],

@@ -5,6 +5,5 @@ export interface User {
     fullName: string;
     roles: string[];
     isSuperAdmin: boolean;
-    email?: string;
-    isActive: boolean;
+    role?:string;
   }

@@ -8,7 +8,7 @@ export const authGuard = (): boolean | UrlTree | Observable<boolean | UrlTree> |
   const router = inject(Router);
 
   if (authService.isAuthenticated()) {
-    return true;
+    return false;
   }
 
   // Redirect to login page

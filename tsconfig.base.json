@@ -33,7 +33,8 @@
       "@access-control-panel/ui": ["libs/shared/ui/src/index.ts"],
       "@access-control-panel/user-management": [
         "libs/features/user-management/src/index.ts"
-      ]
+      ],
+      "@access-control-panel/environments": ["apps/access-control-panel/src/environments/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
