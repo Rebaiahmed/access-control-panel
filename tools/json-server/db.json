@@ -5,6 +5,12 @@
       "username": "superadmin",
       "password": "admin",
       "role": "superadmin"
+    },
+     {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "role": "normal"
     }
   ],
   "roles": [

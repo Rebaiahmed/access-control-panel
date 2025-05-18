@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve access-control-panel",
-    "json-server": "json-server --watch tools/json-server/db.json --port 3333"
+    "json-server": "json-server --watch tools/json-server/db.json --port 3333",
+    "start:backend": "json-server ./tools/json-server/db.json --middlewares ./node_modules/json-server-auth",
+    "start:frontend": "ng serve",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
   },
   "private": true,
   "dependencies": {

@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { LoginComponent } from '@access-control-panel/authentication';
 import { SidebarComponent } from '@access-control-panel/ui';
-import { authGuard } from '@access-control-panel/core';
+import { authGuard, superAdminGuard } from '@access-control-panel/core';
 
 
 export const appRoutes: Route[] = [
@@ -28,6 +28,7 @@ export const appRoutes: Route[] = [
         path: 'users',
         loadComponent: () =>
           import('@access-control-panel/user-management').then(m => m.UserManagementComponent),
+        canActivate: [superAdminGuard],
       },
       {
         path: 'roles',

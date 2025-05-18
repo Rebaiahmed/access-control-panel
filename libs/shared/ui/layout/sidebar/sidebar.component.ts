@@ -8,6 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService, AuthStore } from '@access-control-panel/authentication';
 
 @Component({
   selector: 'lib-sidebar',
@@ -23,9 +24,11 @@ import { CommonModule } from '@angular/common';
 export class SidebarComponent {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
- // authStore = inject(AuthService);
+  authStore = inject(AuthStore);
+  currentUser = this.authStore.currentUser;
+  isSuperAdmin = this.authStore.isSuperAdmin;
 
   logout() {
-  //this.authStore.logout();
+   this.authStore.logout();
   }
 }
