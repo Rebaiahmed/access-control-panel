@@ -1,3 +1,7 @@
+<mat-toolbar color="primary" class="main-navbar">
+  <span class="navbar-title">Access Control Panel</span>
+</mat-toolbar>
+
 <div class="login-container">
   <mat-card>
     <mat-card-header>
@@ -30,6 +34,10 @@
             }
           </button>
         </div>
+
+        @if (authStore.error()) {
+          <p class="error-message mat-caption">{{ authStore.error() }}</p>
+        }
       </form>
     </mat-card-content>
   </mat-card>

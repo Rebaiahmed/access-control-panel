@@ -12,7 +12,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     component: SidebarComponent,
-    canActivate: [authGuard],
+   canActivate: [authGuard],
     children: [
       {
         path: '',

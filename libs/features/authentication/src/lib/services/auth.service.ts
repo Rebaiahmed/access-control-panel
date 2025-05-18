@@ -30,13 +30,11 @@ export class AuthService {
           const generatedToken = JwtUtils.generateFrontendToken({
             userId: foundUser.id,
             username: foundUser.username,
-            role: foundUser.role, // Include role if applicable
-            exp: Date.now() + 3600 * 1000, // Token expiry in 1 hour
+            role: foundUser.role,
+            exp: Date.now() + 3600 * 1000,
           });
 
-          // Store the token directly here for resilience, though the store will also handle it.
-          // This ensures the guard can immediately pick it up on page refresh.
-         // JwtUtils.saveToken(generatedToken);
+          JwtUtils.saveToken(generatedToken);
           return of({ user: foundUser, token: generatedToken } as LoginResponse);
         } else {
           throw new Error('Invalid username or password');
@@ -51,6 +49,7 @@ export class AuthService {
 
 
   logout(): void {
+    JwtUtils.removeToken();
     this.router.navigate(['/login']);
   }
 

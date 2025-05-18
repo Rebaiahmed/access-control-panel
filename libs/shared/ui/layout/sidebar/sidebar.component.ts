@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
+
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,7 +8,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'lib-sidebar',
@@ -23,9 +23,9 @@ import { CommonModule } from '@angular/common';
 export class SidebarComponent {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
+ // authStore = inject(AuthService);
 
   logout() {
-    // Implement your logout logic here
-    console.log('Logout clicked');
+  //this.authStore.logout();
   }
 }

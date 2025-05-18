@@ -1,17 +1,21 @@
+import { AuthStore } from '@access-control-panel/authentication';
 import { inject } from '@angular/core';
-import { Router, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service'
+import { toObservable } from '@angular/core/rxjs-interop';
+import { CanActivateFn, Router } from '@angular/router';
+import { map } from 'rxjs';
 
-export const authGuard = (): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> => {
-  const authService = inject(AuthService);
+export const authGuard: CanActivateFn = (route, state) => {
+  const authStore = inject(AuthStore);
   const router = inject(Router);
-
-  if (authService.isAuthenticated()) {
-    return false;
-  }
-
-  // Redirect to login page
-  return router.parseUrl('/login');
+  return toObservable(authStore.authenticated).pipe(
+    map(isAuthenticated => {
+      if (isAuthenticated) {
+        alert('You are already logged in');
+        return true;
+      } else {
+        return router.parseUrl('/login');
+      }
+    })
+  );
 };
 

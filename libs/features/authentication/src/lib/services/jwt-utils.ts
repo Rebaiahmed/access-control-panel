@@ -19,14 +19,14 @@ export class JwtUtils {
      * @returns The token string or null
      */
     static getToken(): string | null{
-      return localStorage.getItem('frontend_token');
+      return localStorage.getItem(JwtUtils.TOKEN_STORAGE_KEY);
     }
   
     /**
      * Removes the token from local storage
      */
     static removeToken(): void{
-      localStorage.removeItem('frontend_token');
+      localStorage.removeItem(JwtUtils.TOKEN_STORAGE_KEY);
     }
 
     static saveToken(token: string): void {

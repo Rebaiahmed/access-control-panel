@@ -32,7 +32,6 @@
         ],
         "scripts": [],
         "define": {
-          "MY_API_URL": "http://localhost:3333"
         }
         
       },

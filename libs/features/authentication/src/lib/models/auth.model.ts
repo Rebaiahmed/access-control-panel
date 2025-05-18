@@ -10,3 +10,8 @@ export interface LoginCredentials {
     username: string;
     password: string;
   }
+
+  export const USER_ROLES = {
+    SUPER_ADMIN: 'superadmin',
+    ADMIN: 'admin',
+  } as const;
