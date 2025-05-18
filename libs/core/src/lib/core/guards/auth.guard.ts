@@ -10,7 +10,6 @@ export const authGuard: CanActivateFn = (route, state) => {
   return toObservable(authStore.authenticated).pipe(
     map(isAuthenticated => {
       if (isAuthenticated) {
-        alert('You are already logged in');
         return true;
       } else {
         return router.parseUrl('/login');

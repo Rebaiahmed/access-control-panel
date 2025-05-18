@@ -15,11 +15,11 @@ export class RoleManagementService {
     return this.http.get<Role[]>(this.apiUrl);
   }
 
-  createRole(role: Omit<Role, 'id'>): Observable<Role> { // Use Omit for type safety
+  createRole(role: Omit<Role, 'id'>): Observable<Role> {
     return this.http.post<Role>(this.apiUrl, role);
   }
 
-  updateRole(id: number, role: Omit<Role, 'id' | 'name'>): Observable<Role> {
+  updateRole(id: number, role: Role): Observable<Role> {
     return this.http.put<Role>(`${this.apiUrl}/${id}`, role);
   }
 

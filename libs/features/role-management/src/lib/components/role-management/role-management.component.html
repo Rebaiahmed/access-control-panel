@@ -1,1 +1,13 @@
-<p>RoleManagement works!</p>
+<div class="role-management-container">
+  <div class="header-section">
+    <h2>Role Management</h2>
+    <button mat-raised-button color="primary" (click)="onCreateRole()">
+      <mat-icon>add</mat-icon> Create New Role
+    </button>
+  </div>
+
+  <lib-roles-list
+    [roles]="roles()" (editRole)="onEditRole($event)"
+    (deleteRole)="onDeleteRole($event)"
+  ></lib-roles-list>
+</div>
