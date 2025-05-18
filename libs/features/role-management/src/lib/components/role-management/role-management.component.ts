@@ -7,4 +7,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './role-management.component.html',
   styleUrl: './role-management.component.css',
 })
-export class RoleManagementComponent {}
+export class RoleManagementComponent {
+
+   private roleService = inject(RoleService);
+
+
+
+}

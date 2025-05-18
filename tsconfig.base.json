@@ -19,6 +19,9 @@
         "libs/features/authentication/src/index.ts"
       ],
       "@access-control-panel/core": ["libs/core/src/index.ts"],
+      "@access-control-panel/environments": [
+        "apps/access-control-panel/src/environments/*"
+      ],
       "@access-control-panel/home": ["libs/features/home/src/index.ts"],
       "@access-control-panel/navbar": [
         "libs/shared/ui/layout/navbar/src/index.ts"
@@ -33,8 +36,7 @@
       "@access-control-panel/ui": ["libs/shared/ui/src/index.ts"],
       "@access-control-panel/user-management": [
         "libs/features/user-management/src/index.ts"
-      ],
-      "@access-control-panel/environments": ["apps/access-control-panel/src/environments/*"]
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

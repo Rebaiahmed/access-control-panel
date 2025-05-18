@@ -11,3 +11,9 @@ export interface Permission {
     DELETE = 'delete',
     MANAGE = 'manage'
   }
+
+export interface Role {
+  id: number;
+  name: string;
+  permissions: string[];
+}
