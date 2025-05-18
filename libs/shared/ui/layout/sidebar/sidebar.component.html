@@ -1,39 +1,51 @@
-<mat-toolbar color="primary" class="mat-elevation-z4 layout-toolbar">
-  <button mat-icon-button (click)="sidenav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
+<mat-toolbar color="primary" class="mat-elevation-z4 toolbar">
+  <div class="toolbar-left">
+    <button mat-icon-button (click)="sidenav.toggle()" class="menu-button">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="toolbar-title">Access Control Panel</span>
+  </div>
 
-  <span class="toolbar-title">Access Control Panel</span>
-
-  <span class="spacer"></span>
-
-  <span class="user-info">Welcome, Mock User</span>
-  <button mat-icon-button matTooltip="Logout" (click)="logout()">
-    <mat-icon>exit_to_app</mat-icon>
-  </button>
+  <div class="toolbar-right">
+    <span class="user-info">
+      <mat-icon>account_circle</mat-icon>
+      <span>Welcome, Mock User</span>
+    </span>
+    <button mat-icon-button matTooltip="Logout" (click)="logout()" class="logout-button">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
 
-<mat-sidenav-container class="layout-sidenav-container">
-  <mat-sidenav #sidenav mode="side" opened>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened class="sidenav">
     <mat-nav-list>
-      <a mat-list-item routerLink="/home" routerLinkActive="active">
-        <mat-icon matListIcon>home</mat-icon>
-        <span>Home</span>
+      <a mat-list-item routerLink="/home" routerLinkActive="active" class="nav-item">
+        <div class="nav-icon-container">
+          <mat-icon>home</mat-icon>
+        </div>
+        <span class="nav-text">Home</span>
       </a>
 
-      <a mat-list-item routerLink="/users" routerLinkActive="active">
-        <mat-icon matListIcon>people</mat-icon>
-        <span>Users</span>
+      <a mat-list-item routerLink="/users" routerLinkActive="active" class="nav-item">
+        <div class="nav-icon-container">
+          <mat-icon>people</mat-icon>
+        </div>
+        <span class="nav-text">Users</span>
       </a>
 
-      <a mat-list-item routerLink="/roles" routerLinkActive="active">
-        <mat-icon matListIcon>security</mat-icon>
-        <span>Roles</span>
+      <a mat-list-item routerLink="/roles" routerLinkActive="active" class="nav-item">
+        <div class="nav-icon-container">
+          <mat-icon>security</mat-icon>
+        </div>
+        <span class="nav-text">Roles</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content class="layout-sidenav-content">
-    <router-outlet></router-outlet>
+  <mat-sidenav-content class="sidenav-content">
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

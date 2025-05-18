@@ -1,1 +1,1 @@
-export * from './lib/user-management/user-management.component';
+export * from './lib/components/user-management/user-management.component';

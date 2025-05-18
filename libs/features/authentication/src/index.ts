@@ -1,2 +1,2 @@
-export * from './lib/authentication/authentication.component';
-export * from './lib/login/login.component';
+export * from './lib/componnets/authentication/authentication.component';
+export * from './lib/componnets/login/login.component';
