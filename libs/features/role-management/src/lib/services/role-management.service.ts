@@ -9,7 +9,7 @@ import { Permission, Role } from '../models/role-management';
 export class RoleManagementService {
 
    private http = inject(HttpClient);
-   private apiUrl = 'http://localhost:3000';
+    private apiUrl = 'http://localhost:3000/roles';
 
     private ALL_PERMISSIONS: Permission[] = [
     { id: 'users.view', name: 'View Users', description: 'Allows viewing user lists' },

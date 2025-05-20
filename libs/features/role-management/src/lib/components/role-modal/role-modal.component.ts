@@ -73,9 +73,7 @@ export class RoleModalComponent implements OnInit  {
     }
   }
 
-  onCancel(): void {
-    this.dialogRef.close(false);
-  }
+ 
 
   isPermissionSelected(permissionValue: string): boolean {
     const currentPermissions = this.roleForm.get('permissions')?.value || [];
@@ -100,5 +98,9 @@ export class RoleModalComponent implements OnInit  {
     } else {
       this.dialogRef.close(false);
     }
+  }
+
+   onCancel(): void {
+    this.dialogRef.close(false);
   }
 }

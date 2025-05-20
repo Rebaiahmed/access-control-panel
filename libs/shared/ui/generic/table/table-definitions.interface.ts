@@ -8,5 +8,5 @@ export interface TableBtn<T> {
   action: string;
   icon: string;
   styleClass?: string;
- payload: (element: T) => any;
+ onClick: (element: T) => any;
 }

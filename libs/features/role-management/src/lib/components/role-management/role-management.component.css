@@ -1,0 +1,23 @@
+.role-management-container {
+  margin-top: 20px; /* Add space above the whole section */
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between; /* Push elements to the edges */
+  align-items: center; /* Vertically center items */
+  margin-bottom: 20px; /* Add space below the header */
+}
+
+.header-title {
+  margin-right: auto; /* Push title to the left */
+}
+
+.button-container {
+  margin-left: auto; /* Push button container to the right */
+}
+
+
+.list-section {
+  margin-top: 20px; /* Add space above the list */
+}

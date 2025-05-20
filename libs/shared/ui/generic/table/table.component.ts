@@ -1,20 +1,22 @@
-import { AfterViewInit, Component, computed, effect, input, OnInit, output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { AfterViewInit, Component, computed, effect, input, output, ViewChild } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TableBtn, TableColumn } from './table-definitions.interface';
 
 @Component({
   selector: 'lib-table',
-  imports: [CommonModule],
+  imports: [CommonModule,MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, MatIconModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements AfterViewInit {
 
-  columns = input<TableColumn<unknown>[]>([]);
-  buttons = input<TableBtn<unknown>[]>([]);
+  columns = input<TableColumn<any>[]>([]);
+  buttons = input<TableBtn<any>[]>([]);
   data = input<unknown[]>([]);
   footer = input<string | null>(null);
   pagination = input<number[]>([]);
@@ -46,8 +48,6 @@ export class TableComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

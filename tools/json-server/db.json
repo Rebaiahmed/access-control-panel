@@ -18,6 +18,16 @@
       "id": 1,
       "name": "Admin",
       "permissions": ["create", "edit", "delete"]
+    },
+     {
+      "id": 1,
+      "name": "Admin",
+      "permissions": ["create", "edit", "delete"]
+    },
+     {
+      "id": 1,
+      "name": "Admin",
+      "permissions": ["create", "edit", "delete"]
     }
   ]
 }

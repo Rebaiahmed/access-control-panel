@@ -17,8 +17,8 @@
               <button
                 mat-icon-button
                 color="primary"
-                (click)="buttonClick.emit([button.action, button.payload(row)])"
-                [attr.aria-label]="button.action + ' ' + (button.payload(row)?.id || '')"
+                (click)="buttonClick.emit([button.action, button.onClick(row)])"
+                [attr.aria-label]="button.action + ' ' + (button.onClick(row)?.id || '')"
               >
                 <mat-icon>{{ button.icon }}</mat-icon>
               </button>

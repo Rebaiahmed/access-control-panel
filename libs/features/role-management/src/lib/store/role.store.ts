@@ -1,5 +1,5 @@
 import { computed, inject } from '@angular/core';
-import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
+import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
 import { Observable, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { Role } from '../models/role-management';
@@ -70,4 +70,9 @@ export const RoleStore = signalStore(
       return roleService.isRoleAssignedToUsers(id);
     },
   })),
+  withHooks((state) => ({
+    onInit: () => {
+      //state.loadRoles();
+    },
+  }))
 );
