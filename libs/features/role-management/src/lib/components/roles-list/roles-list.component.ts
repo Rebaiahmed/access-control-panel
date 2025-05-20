@@ -10,7 +10,6 @@ import { Role } from '../../models/role-management';
 })
 export class RolesListComponent {
 
-
   @Input() roles: Role[] = [];
   @Output() editRole = new EventEmitter<Role>();
   @Output() deleteRole = new EventEmitter<Role>();

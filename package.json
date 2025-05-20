@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "json-server": "json-server --watch tools/json-server/db.json --port 3333",
-    "start:backend": "json-server ./tools/json-server/db.json --middlewares ./node_modules/json-server-auth",
-    "start:frontend": "ng serve",
+    "start:backend": "json-server ./tools/json-server/db.json",
+    "start:frontend": "nx serve access-control-panel",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
   },
   "private": true,
@@ -25,6 +25,7 @@
     "@ngrx/signals": "^19.2.0",
     "@ngrx/store": "^19.2.0",
     "@ngrx/store-devtools": "^19.2.0",
+    "concurrently": "^9.1.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

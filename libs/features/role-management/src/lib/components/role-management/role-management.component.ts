@@ -7,6 +7,7 @@ import { Role } from '../../models/role-management';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { RolesListComponent } from '../roles-list/roles-list.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'lib-role-management',
@@ -14,7 +15,8 @@ import { RolesListComponent } from '../roles-list/roles-list.component';
     CommonModule,
     MatIconModule,
     MatDialogModule,
-    RolesListComponent
+    RolesListComponent,
+    MatButtonModule
 ],
   templateUrl: './role-management.component.html',
   styleUrl: './role-management.component.css',
@@ -27,8 +29,8 @@ export class RoleManagementComponent {
 
   onCreateRole(): void {
     const dialogRef = this.dialog.open(RoleModalComponent, {
-      width: '500px',
-      // Pass data to the modal to indicate it's in creation mode
+      width: '450px',
+      height: '450px',
       data: { isEditMode: false },
     });
     dialogRef.afterClosed().subscribe((actionWasSuccessful: boolean) => {
@@ -48,10 +50,6 @@ export class RoleManagementComponent {
   }
 
   onDeleteRole(role: Role): void {
-    if (!role.id) {
-      // this.snackBar.open('Cannot delete role: Role ID is missing.', 'Close', { duration: 3000 });
-      return;
-    }
   /*   this.dialogRef.afterClosed().subscribe((actionWasSuccessful: boolean) => {
       if (actionWasSuccessful) {
         // The RoleStore's updateRole method already updates the 'roles' signal.

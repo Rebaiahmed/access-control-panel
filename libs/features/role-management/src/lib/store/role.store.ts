@@ -1,9 +1,7 @@
-// libs/features/role-management/src/lib/store/role.store.ts
 import { computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { Observable, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-
 import { Role } from '../models/role-management';
 import { RoleManagementService } from '../services/role-management.service';
 import { ToastService } from '@access-control-panel/core';
@@ -46,7 +44,7 @@ export const RoleStore = signalStore(
       );
     },
 
-    updateRole(id: number, role: Role) {
+    updateRole(id: string, role: Role) {
       return roleService.updateRole(id, role).pipe(
         tap((updatedRole) => {
          patchState(state, (s) => ({
@@ -57,7 +55,7 @@ export const RoleStore = signalStore(
       );
     },
 
-    deleteRole(id: number, roleName: string) {
+    deleteRole(id: string, roleName: string) {
       return roleService.deleteRole(id).pipe(
         tap(() => {
         patchState(state, (s) => ({

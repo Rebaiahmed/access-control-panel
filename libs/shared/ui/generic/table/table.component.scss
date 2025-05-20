@@ -1,0 +1,26 @@
+.mat-elevation-z8 {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding: 8px 16px;
+}
+
+.btn-group {
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.btn-group:last-child {
+  margin-right: 0;
+}
+
+.no-data-row {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+}

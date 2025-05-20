@@ -1,1 +1,49 @@
-<p>role-modal works!</p>
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="roleForm" class="role-form">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Role Name</mat-label>
+      <input
+        matInput
+        formControlName="name"
+        placeholder="Role name"
+        [readonly]="isEditMode"
+      />
+      @if (roleForm.get('name')?.hasError('required')) {
+      <mat-error> Role name is required </mat-error>
+      } @if (roleForm.get('name')?.hasError('nonUniqueName')) {
+      <mat-error> Role name must be unique </mat-error>
+      }
+    </mat-form-field>
+
+    <div class="permissions-section">
+      <h3>Permissions</h3>
+      <div class="permissions-grid">
+        @for (permission of availablePermissions; track permission.id) {
+        <mat-checkbox
+          [checked]="isPermissionSelected(permission.id)"
+          (change)="onPermissionChange($event, permission.id)"
+        >
+          <div class="permission-item">
+            <span class="permission-label">{{ permission.name }}</span>
+            <span class="permission-description">
+              - {{ permission.description }}
+            </span>
+          </div>
+        </mat-checkbox>
+        }
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSaveRole()"
+    [disabled]="roleForm.invalid"
+  >
+    Save
+  </button>
+</mat-dialog-actions>
