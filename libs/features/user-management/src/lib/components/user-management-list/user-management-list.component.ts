@@ -1,9 +1,10 @@
 import { TableAction, TableColumn, TableComponent } from '@access-control-panel/ui';
 import { CommonModule } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { User } from '../../models/user-management.model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'lib-user-management-list',
   imports: [CommonModule,TableComponent, MatButtonModule, MatIconModule],
@@ -11,6 +12,7 @@ import { User } from '../../models/user-management.model';
   styleUrl: './user-management-list.component.scss',
 })
 export class UserManagementListComponent {
+   private router = inject(Router);
 
 users = input.required<User[]>();
   editUser = output<User>();
@@ -44,6 +46,12 @@ users = input.required<User[]>();
         color: 'warn',
         disabled: (user: User) => user.isSuperAdmin,
       },
+      {
+      actionId: 'view',
+      icon: 'visibility',
+      tooltip: 'View User Details',
+      color: 'accent', 
+    },
   ];
 
 
@@ -63,6 +71,9 @@ users = input.required<User[]>();
       case 'delete':
         this.onDeleteUser(action.element);
         break;
+      case 'view':
+        this.router.navigate(['/users', action.element.id]);
+        break; 
       default:
         console.error('Unknown user action:', action.actionId);
     }

@@ -5,7 +5,8 @@
       "username": "superadmin",
       "password": "admin",
       "role": "superadmin",
-      "isSuperAdmin": true
+      "isSuperAdmin": true,
+      "roleId": "1"
     }
   ],
   "roles": [
@@ -13,26 +14,49 @@
       "id": "1",
       "name": "Super-Admin",
       "permissions": [
-        "create",
-        "edit",
-        "delete",
-        "view"
+        {
+          "id": "users.view",
+          "name": "View Users",
+          "description": "Permission to access the user list and details."
+        },
+        {
+          "id": "users.create",
+          "name": "Create Users",
+          "description": "Permission to add new user accounts."
+        },
+        {
+          "id": "users.edit",
+          "name": "Edit Users",
+          "description": "Permission to modify existing user accounts."
+        },
+        {
+          "id": "users.delete",
+          "name": "Delete Users",
+          "description": "Permission to delete user accounts."
+        }
       ]
     },
     {
-      "id": "8e0f6e45-d973-4212-bdbd-b427a5e72b5c",
-      "name": "Test",
+      "id": "aecb4458-8949-4e4d-95e6-ac7b66eb4748",
+      "name": "Viewer",
       "permissions": [
-        "users.view",
-        "users.create"
+        "View Users"
       ]
     },
     {
-      "id": "b7c61390-9cc1-4e9c-889b-29cecccc1d9f",
-      "name": "Test3",
+      "id": "7b574b26-ebfc-400f-a649-1c582a1405cf",
+      "name": "test",
       "permissions": [
-        "View Users",
-        "Create Users"
+        {
+          "id": "users.view",
+          "name": "View Users",
+          "description": "Allows viewing user lists"
+        },
+        {
+          "id": "users.create",
+          "name": "Create Users",
+          "description": "Allows creating new users"
+        }
       ]
     }
   ]

@@ -32,7 +32,7 @@ export class RoleManagementService {
     return this.http.get<Role>(`${this.apiUrl}/roles/${id}`);
   }
 
-  createRole(role: Omit<Role, 'id'>): Observable<Role> {
+  createRole(role: Role): Observable<Role> {
     return this.http.post<Role>(`${this.apiUrl}/roles`, role);
   }
 

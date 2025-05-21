@@ -21,8 +21,8 @@
       <div class="permissions-grid">
         @for (permission of availablePermissions; track permission.id) {
         <mat-checkbox
-          [checked]="isPermissionSelected(permission.id)"
-          (change)="onPermissionChange($event, permission.name)"
+          [checked]="isPermissionSelected(permission)"
+          (change)="onPermissionChange($event, permission)"
         >
           <div class="permission-item">
             <span class="permission-label">{{ permission.name }}</span>
