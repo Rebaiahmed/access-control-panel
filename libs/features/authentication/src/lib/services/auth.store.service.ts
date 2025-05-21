@@ -6,10 +6,12 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, pipe, switchMap, tap } from 'rxjs';
 import { LoginCredentials, USER_ROLES } from '../models/auth.model';
 import { AuthService } from './auth.service';
+import { Role } from '@access-control-panel/role-management';
 
 
 export interface AuthState {
   user: User | null;
+  userRole: Role | null;
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -18,6 +20,7 @@ export interface AuthState {
 
 const initialState: AuthState = {
   user: null,
+  userRole: null,
   token: null,
   isAuthenticated: false,
   isLoading: false,
@@ -32,6 +35,7 @@ export const AuthStore = signalStore(
     currentUser: computed(() => state.user()),
     authenticated: computed(() => state.isAuthenticated()),
     isSuperAdmin: computed(() => state.user()?.isSuperAdmin || false),
+
   })),
   withMethods((state, authService = inject(AuthService),router = inject(Router)) => ({
     login: rxMethod<LoginCredentials>(
@@ -65,6 +69,10 @@ export const AuthStore = signalStore(
     logout() {
       authService.logout();
       patchState(state, initialState);
+    },
+     hasPermission(permissionId: string): boolean {
+      const role = state.userRole();
+      return role ? role.permissions.some(p => p.id === permissionId) : false;
     },
   }))
 );

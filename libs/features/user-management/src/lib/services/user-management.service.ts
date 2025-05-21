@@ -15,6 +15,10 @@ export class UserManagementService {
     return this.http.get<User[]>(this.apiUrl);
   }
 
+   getUserById(id: string): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/users/${id}`);
+  }
+
   createUser(user: Omit<User, 'id'>): Observable<User> {
     return this.http.post<User>(this.apiUrl, user);
   }

@@ -29,7 +29,6 @@
         <h3>Assigned Role:</h3>
         @if (assignedRole()) {
           <p><strong>Role Name:</strong> {{ assignedRole()?.name }}</p>
-          <p><strong>Role Description:</strong> {{ assignedRole()?.description || 'N/A' }}</p>
 
           @if (assignedRole()!.permissions.length > 0) {
             <mat-divider></mat-divider>

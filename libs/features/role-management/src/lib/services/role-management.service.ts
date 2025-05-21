@@ -28,6 +28,10 @@ export class RoleManagementService {
     return this.http.get<Role[]>(`${this.apiUrl}/roles`);
   }
 
+   getRoleById(id: string): Observable<Role> {
+    return this.http.get<Role>(`${this.apiUrl}/roles/${id}`);
+  }
+
   createRole(role: Omit<Role, 'id'>): Observable<Role> {
     return this.http.post<Role>(`${this.apiUrl}/roles`, role);
   }
