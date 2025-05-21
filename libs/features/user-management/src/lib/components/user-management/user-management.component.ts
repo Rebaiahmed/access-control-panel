@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, Signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserStore } from '../../store/user.store';
 import { UserModalComponent } from '../user-modal/user-modal.component';
@@ -11,7 +11,6 @@ import { UserManagementService } from '../../services/user-management.service';
 import { UserManagementListComponent } from '../user-management-list/user-management-list.component';
 import { ConfirmationDialogComponent } from '@access-control-panel/ui';
 
-
 export const DELETE_USER_DIALOG = {
   width: '350px',
   message: (username: string) => `Are you sure you want to delete user "${username}"?`,
@@ -20,7 +19,6 @@ export const DELETE_USER_DIALOG = {
     cancel: 'Cancel'
   }
 };
-
 @Component({
   selector: 'lib-user-management',
   imports: [ CommonModule,
@@ -31,7 +29,7 @@ export const DELETE_USER_DIALOG = {
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.scss',
 })
-export class UserManagementComponent {
+export class UserManagementComponent implements OnInit {
 
  private userService = inject(UserManagementService);
   private dialog = inject(MatDialog);
@@ -50,6 +48,7 @@ export class UserManagementComponent {
       data: { isEditMode: false },
     });
     dialogRef.afterClosed()
+    .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe((actionWasSuccessful: boolean) => {
       // UserStore's createUser method already updates the 'users' signal
     });
@@ -61,7 +60,9 @@ export class UserManagementComponent {
       height: '450px',
       data: { user: user, isEditMode: true },
     });
-    dialogRef.afterClosed().subscribe((actionWasSuccessful: boolean) => {
+    dialogRef.afterClosed()
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe((actionWasSuccessful: boolean) => {
       // UserStore's updateUser method already updates the 'users' signal
     });
   }

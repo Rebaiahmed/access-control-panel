@@ -1,6 +1,6 @@
 import { computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
-import { Observable, pipe, switchMap, tap } from 'rxjs';
+import { catchError, Observable, pipe, switchMap, tap, throwError } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { Role } from '../models/role-management';
 import { RoleManagementService } from '../services/role-management.service';
@@ -41,6 +41,10 @@ export const RoleStore = signalStore(
            patchState(state, (s) => ({ roles: [...s.roles, newRole] }));
           toastService.success(`Role '${newRole.name}' created successfully!`);
         }),
+         catchError((error) => {
+          toastService.error(`Failed to create role '${role.name}'. Please try again.`);
+          return throwError(() => error);
+        })
       );
     },
 
@@ -66,7 +70,7 @@ export const RoleStore = signalStore(
       );
     },
 
-    isRoleAssignedToUsers(id: number): Observable<boolean> {
+    isRoleAssignedToUsers(id: string): Observable<boolean> {
       return roleService.isRoleAssignedToUsers(id);
     },
   })),

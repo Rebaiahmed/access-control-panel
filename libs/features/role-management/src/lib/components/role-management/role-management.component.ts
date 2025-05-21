@@ -10,6 +10,9 @@ import { RoleModalComponent } from '../role-modal/role-modal.component';
 import { RolesListComponent } from '../roles-list/roles-list.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ConfirmationDialogComponent } from '@access-control-panel/ui';
+import { filter, Observable, of, switchMap } from 'rxjs';
+import { ToastService } from '@access-control-panel/core';
+
 
 export const DELETE_ROLE_DIALOG = {
   width: '350px',
@@ -38,6 +41,7 @@ export class RoleManagementComponent implements OnInit {
   private dialog = inject(MatDialog);
    private destroyRef = inject(DestroyRef);
   roleStore = inject(RoleStore);
+  toastService = inject(ToastService)
   roles = this.roleStore.roles;
 
 ngOnInit() {
@@ -50,12 +54,9 @@ ngOnInit() {
       height: '450px',
       data: { isEditMode: false },
     });
-    dialogRef.afterClosed().subscribe((actionWasSuccessful: boolean) => {
-      if (actionWasSuccessful) {
-        // The RoleStore's createRole method already updates the 'roles' signal,
-        // so no manual reload needed here. The view will automatically reflect changes.
-      }
-    });
+    dialogRef.afterClosed()
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe();
   }
 
   onEditRole(role: Role): void {
@@ -66,7 +67,27 @@ ngOnInit() {
   }
 
   onDeleteRole(role: Role): void {
-   const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    this.roleService.isRoleAssignedToUsers(role.id)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        switchMap(isAssigned => this._handleRoleAssignmentCheck(isAssigned, role)),
+        filter(confirmed => confirmed === true),
+        switchMap(() => this._performRoleDeletion(role))
+      )
+      .subscribe();
+  }
+
+  private _handleRoleAssignmentCheck(isAssigned: boolean, role: Role): Observable<boolean | null> {
+    if (isAssigned) {
+      this.toastService.error(`Cannot delete role '${role.name}' as it is assigned to users.`);
+      return of(null);
+    } else {
+      return this._openDeleteConfirmationDialog(role);
+    }
+  }
+
+  private _openDeleteConfirmationDialog(role: Role): Observable<boolean> {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: DELETE_ROLE_DIALOG.width,
       data: {
         message: DELETE_ROLE_DIALOG.message(role.name),
@@ -76,16 +97,11 @@ ngOnInit() {
         }
       }
     });
+    return dialogRef.afterClosed();
+  }
 
-    dialogRef.afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((confirmed: boolean) => {
-        if (confirmed) {
-          this.roleStore.deleteRole(role.id, role.name)
-            //.pipe(takeUntilDestroyed())
-            .subscribe();
-        }
-      });
+  private _performRoleDeletion(role: Role): Observable<any> {
+    return this.roleStore.deleteRole(role.id, role.name);
   }
   }
 

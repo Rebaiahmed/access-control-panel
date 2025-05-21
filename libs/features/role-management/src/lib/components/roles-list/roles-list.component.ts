@@ -1,4 +1,4 @@
-import { TableAction, TableBtn, TableColumn, TableComponent } from '@access-control-panel/ui';
+import { TableAction, TableColumn, TableComponent } from '@access-control-panel/ui';
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -42,7 +42,6 @@ roles = input.required<Role[]>();
         icon: 'delete',
         tooltip: 'Delete Role',
         color: 'warn',
-        disabled: (role: Role) => true
       },
   ];
 

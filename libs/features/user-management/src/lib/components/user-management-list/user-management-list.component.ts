@@ -35,13 +35,14 @@ users = input.required<User[]>();
         icon: 'edit',
         tooltip: 'Edit User',
         color: 'primary',
+        disabled: (user: User) => user.isSuperAdmin,
       },
       {
         actionId: 'delete',
         icon: 'delete',
         tooltip: 'Delete User',
         color: 'warn',
-        disabled: (user: User) => false
+        disabled: (user: User) => user.isSuperAdmin,
       },
   ];
 

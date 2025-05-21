@@ -1,14 +1,24 @@
-import { FormControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
+import { catchError, map, Observable, of, switchMap, timer } from 'rxjs';
+import { RoleManagementService } from '../services/role-management.service';
 
-export function uniqueRoleNameValidator(isEditMode: boolean) {
-  return (control: FormControl): ValidationErrors | null => {
-    if (isEditMode) {
-      return null;
+export function uniqueRoleNameValidator(
+   roleService: RoleManagementService,
+  originalRoleId?: string
+): AsyncValidatorFn {
+  return (control: AbstractControl): Observable<ValidationErrors | null> => {
+    if (!control.value) {
+      return of(null);
     }
-    const existingRoles = (window as any).existingRoles || [];
-    if (existingRoles.includes(control.value)) {
-      return { nonUniqueName: true };
-    }
-    return null;
+    return timer(500).pipe(
+      switchMap(() =>
+        roleService.checkRoleNameExists(control.value, originalRoleId).pipe(
+          map(exists => {
+            return exists ? { nonUniqueName: true } : null;
+          }),
+          catchError(() => of(null))
+        )
+      )
+    );
   };
 }

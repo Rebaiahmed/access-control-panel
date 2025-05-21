@@ -1,7 +1,7 @@
 import { ToastService } from '@access-control-panel/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { Component, Inject, inject, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -11,7 +11,6 @@ import { Permission, Role } from '../../models/role-management';
 import { RoleManagementService } from '../../services/role-management.service';
 import { RoleStore } from '../../store/role.store';
 import { uniqueRoleNameValidator } from '../../utils/custom-validator';
-import { catchError, map, Observable, of, switchMap, timer } from 'rxjs';
 
 @Component({
   selector: 'lib-role-modal',
@@ -32,7 +31,6 @@ export class RoleModalComponent implements OnInit  {
   private dialogRef = inject(MatDialogRef<RoleModalComponent>);
   private roleService = inject(RoleManagementService);
   private roleStore = inject(RoleStore);
-  private toastService = inject(ToastService);
 
   roleForm!: FormGroup;
   isEditMode = false;
@@ -61,6 +59,9 @@ export class RoleModalComponent implements OnInit  {
     this.initForm();
   }
    initForm(): void {
+    const roleNameControl = this.isEditMode && this.data.role
+      ? { value: this.data.role.name, disabled: true }
+      : '';
     if (this.isEditMode && this.data.role) {
       this.roleForm = this.fb.group({
         name: [{ value: this.data.role.name, disabled: true }, Validators.required],
@@ -68,8 +69,12 @@ export class RoleModalComponent implements OnInit  {
       });
     } else {
       this.roleForm = this.fb.group({
-        name: ['', [Validators.required, uniqueRoleNameValidator(this.isEditMode)]],
-        permissions: [[]]
+         name: [
+        roleNameControl,
+        [Validators.required, Validators.minLength(3)],
+        [uniqueRoleNameValidator(this.roleService, this.data.role?.id)]
+      ],
+        permissions: [[],Validators.required]
       });
     }
   }
@@ -81,20 +86,6 @@ export class RoleModalComponent implements OnInit  {
     return currentPermissions.includes(permissionValue);
   }
 
-   roleNameValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      if (!control.value) {
-        return of(null);
-      }
-      return timer(500).pipe( 
-        switchMap(() => this.roleService.checkRoleNameExists(control.value)),
-        map(exists => {
-          // If role exists, return { roleExists: true } error, otherwise null
-          return exists ? { roleExists: true } : null;
-        }),
-      );
-    };
-  }
 
   onSaveRole(): void {
      if (this.roleForm.valid) {
@@ -108,7 +99,7 @@ export class RoleModalComponent implements OnInit  {
         this.roleStore.updateRole(this.data.role!.id,newRole);
         this.dialogRef.close(newRole);
       } else {
-        this.roleStore.createRole(newRole);
+        this.roleStore.createRole(newRole).subscribe();
         this.dialogRef.close(true);
       }
     } else {

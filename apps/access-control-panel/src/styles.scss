@@ -15,10 +15,12 @@ $my-app-theme: mat.m2-define-light-theme((
     accent: $accent-palette,
     warn: $warn-palette,
   ),
-  // Optional: Define typography and density if you need custom settings for M2
-  // typography: mat.m2-define-typography-config(),
-  // density: 0,
+
 ));
 
 // Include the theme styles for all components
 @include mat.all-component-themes($my-app-theme);
+
+mat-form-field {
+  width: 100%;
+}

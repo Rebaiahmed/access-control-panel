@@ -4,32 +4,43 @@
       "id": "1",
       "username": "superadmin",
       "password": "admin",
-      "role": "superadmin"
+      "role": "superadmin",
+      "isSuperAdmin":true
+      
     },
     {
-      "id": "1",
+      "id": "2",
       "username": "admin",
       "password": "admin",
-      "role": "normal"
+      "role": "normal",
+      "isSuperAdmin":false
     }
   ],
   "roles": [
     {
-      "id": "12",
-      "name": "Admin",
+      "id": "1",
+      "name": "Super-Admin",
       "permissions": [
         "create",
         "edit",
-        "delete"
+        "delete",
+        "view"
       ]
     },
     {
-      "id": "10",
-      "name": "Admin",
+      "id": "8e0f6e45-d973-4212-bdbd-b427a5e72b5c",
+      "name": "Test",
       "permissions": [
-        "create",
-        "edit",
-        "delete"
+        "users.view",
+        "users.create"
+      ]
+    },
+    {
+      "id": "a56ff593-dada-4bbb-80d1-e83ffadca8f3",
+      "name": "Test2",
+      "permissions": [
+        "users.create",
+        "users.edit"
       ]
     }
   ]

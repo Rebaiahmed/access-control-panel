@@ -17,6 +17,8 @@
               <button
                 mat-icon-button
                 color="primary"
+                [matTooltip]="button.tooltip" 
+                [disabled]="button.disabled && button.disabled(row)"
                 (click)="executeAction(button.actionId, row)"
               >
                 <mat-icon>{{ button.icon }}</mat-icon>
@@ -37,10 +39,6 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns()"></tr>
-
-    @if (footer()) {
-      <tr mat-footer-row *matFooterRowDef="['disclaimer']" class="example-second-footer-row"></tr>
-    }
 
     @if (dataSource.data.length === 0) {
       <tr class="mat-row no-data-row">
