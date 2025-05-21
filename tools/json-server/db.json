@@ -5,15 +5,15 @@
       "username": "superadmin",
       "password": "admin",
       "role": "superadmin",
-      "isSuperAdmin":true
-      
+      "isSuperAdmin": true
     },
     {
       "id": "2",
       "username": "admin",
       "password": "admin",
       "role": "normal",
-      "isSuperAdmin":false
+      "isSuperAdmin": false,
+      "fullName": "Test Test"
     }
   ],
   "roles": [
@@ -36,11 +36,11 @@
       ]
     },
     {
-      "id": "a56ff593-dada-4bbb-80d1-e83ffadca8f3",
-      "name": "Test2",
+      "id": "b7c61390-9cc1-4e9c-889b-29cecccc1d9f",
+      "name": "Test3",
       "permissions": [
-        "users.create",
-        "users.edit"
+        "View Users",
+        "Create Users"
       ]
     }
   ]

@@ -14,7 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { User } from '../../models/user-management.model';
+import { RoleStore } from '@access-control-panel/role-management';
 
 @Component({
   selector: 'lib-user-modal',
@@ -25,6 +27,7 @@ import { User } from '../../models/user-management.model';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule
   ],
   templateUrl: './user-modal.component.html',
   styleUrl: './user-modal.component.scss',
@@ -34,11 +37,14 @@ export class UserModalComponent implements OnInit {
   private dialogRef = inject(MatDialogRef<UserModalComponent>);
   private userService = inject(UserManagementService);
   private userStore = inject(UserStore);
+  private roleStore = inject(RoleStore);
+
   private toastService = inject(ToastService);
 
   userForm!: FormGroup;
   isEditMode = false;
   title: string;
+  availableRoles = this.roleStore.roles;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { user?: User; isEditMode: boolean }
@@ -66,6 +72,10 @@ export class UserModalComponent implements OnInit {
         this.data.user?.fullName || '',
         [Validators.required, Validators.minLength(3)],
       ],
+       roleId: [
+        this.data.user?.roleId || '',
+        [Validators.required]
+      ]
     });
 
     if (this.isEditMode) {

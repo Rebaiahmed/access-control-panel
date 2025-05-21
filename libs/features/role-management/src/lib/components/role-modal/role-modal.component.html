@@ -22,7 +22,7 @@
         @for (permission of availablePermissions; track permission.id) {
         <mat-checkbox
           [checked]="isPermissionSelected(permission.id)"
-          (change)="onPermissionChange($event, permission.id)"
+          (change)="onPermissionChange($event, permission.name)"
         >
           <div class="permission-item">
             <span class="permission-label">{{ permission.name }}</span>

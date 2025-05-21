@@ -1,0 +1,57 @@
+<div class="user-detail-container">
+  @if (isLoading()) {
+    <mat-card class="loading-card">
+      <mat-card-content>Loading user details...</mat-card-content>
+    </mat-card>
+  } @else if (error()) {
+    <mat-card class="error-card">
+      <mat-card-title>Error</mat-card-title>
+      <mat-card-content>{{ error() }}</mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="goBack()">Go Back</button>
+      </mat-card-actions>
+    </mat-card>
+  } @else if (user()) {
+    <mat-card class="user-detail-card mat-elevation-z2">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon class="card-title-icon">person</mat-icon>
+          {{ user()?.username }}
+        </mat-card-title>
+        <mat-card-subtitle>User Details</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Full Name:</strong> {{ user()?.fullName }}</p>
+        <p><strong>User ID:</strong> {{ user()?.id }}</p>
+
+        <mat-divider></mat-divider>
+
+        <h3>Assigned Role:</h3>
+        @if (assignedRole()) {
+          <p><strong>Role Name:</strong> {{ assignedRole()?.name }}</p>
+          <p><strong>Role Description:</strong> {{ assignedRole()?.description || 'N/A' }}</p>
+
+          @if (assignedRole()!.permissions.length > 0) {
+            <mat-divider></mat-divider>
+            <h3>Permissions:</h3>
+            <mat-list>
+              @for (permission of assignedRole()!.permissions; track permission.id) {
+                <mat-list-item>
+                  <mat-icon matListItemIcon>check_circle</mat-icon>
+                  <div matListItemTitle>{{ permission.name }}</div>
+                  <div matListItemLine>{{ permission.description }}</div>
+                </mat-list-item>
+              }
+            </mat-list>
+          } 
+
+        } @else {
+          <p class="no-role-assigned">No Role Assigned or Role Not Found.</p>
+        }
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button (click)="goBack()">Back to Users</button>
+      </mat-card-actions>
+    </mat-card>
+  }
+</div>

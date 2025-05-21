@@ -17,7 +17,6 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000';
 
   constructor() {
-    //console.log('API URL:', MY_API_URL);
   }
   login(credentials: LoginCredentials): Observable<LoginResponse> {
     return this.http.get<User[]>(`${this.apiUrl}/users`).pipe(
@@ -26,11 +25,10 @@ export class AuthService {
           (u) => u.username === credentials.username && (u as any).password === credentials.password
         );
         if (foundUser) {
-          // Frontend token generation. REMINDER: NOT FOR PRODUCTION.
           const generatedToken = JwtUtils.generateFrontendToken({
             userId: foundUser.id,
             username: foundUser.username,
-            role: foundUser.role,
+            roleId: foundUser.roleId,
             exp: Date.now() + 3600 * 1000,
           });
 

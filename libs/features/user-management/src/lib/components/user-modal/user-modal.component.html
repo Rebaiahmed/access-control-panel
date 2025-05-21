@@ -16,11 +16,8 @@
       @if (userForm.get('username')?.hasError('minlength') && userForm.get('username')?.touched) {
         <mat-error>Username must be at least 3 characters.</mat-error>
       }
-      @if (userForm.get('username')?.pending) {
-        <mat-error>Checking uniqueness...</mat-error>
-      }
-      @if (userForm.get('username')?.hasError('uniqueUsername') && userForm.get('username')?.touched) {
-        <mat-error>This username is already taken.</mat-error>
+      @if (userForm.get('username')?.hasError('nonUniqueName')) {
+      <mat-error> Role name must be unique </mat-error>
       }
     </mat-form-field>
 
@@ -55,7 +52,18 @@
       }
     </mat-form-field>
 
-  </form>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Assign Role</mat-label>
+      <mat-select formControlName="roleId" required>
+        @for (role of availableRoles(); track role.id) {
+          <mat-option [value]="role.id">{{ role.name }}</mat-option>
+        }
+      </mat-select>
+      @if (userForm.get('roleId')?.hasError('required') && userForm.get('roleId')?.touched) {
+        <mat-error>Role is required.</mat-error>
+      }
+    </mat-form-field>
+    </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

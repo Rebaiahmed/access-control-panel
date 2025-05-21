@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, map, Observable } from 'rxjs';
+import { catchError, delay, map, Observable, throwError } from 'rxjs';
 import { Permission, Role } from '../models/role-management';
 import { User } from '@access-control-panel/user-management';
 
@@ -10,7 +10,7 @@ import { User } from '@access-control-panel/user-management';
 export class RoleManagementService {
 
    private http = inject(HttpClient);
-    private apiUrl = 'http://localhost:3000/roles';
+    private apiUrl = 'http://localhost:3000';
 
     private ALL_PERMISSIONS: Permission[] = [
     { id: 'users.view', name: 'View Users', description: 'Allows viewing user lists' },
@@ -23,25 +23,26 @@ export class RoleManagementService {
         return this.ALL_PERMISSIONS;
     }
 
+
   getRoles(): Observable<Role[]> {
-    return this.http.get<Role[]>(this.apiUrl);
+    return this.http.get<Role[]>(`${this.apiUrl}/roles`);
   }
 
   createRole(role: Omit<Role, 'id'>): Observable<Role> {
-    return this.http.post<Role>(this.apiUrl, role);
+    return this.http.post<Role>(`${this.apiUrl}/roles`, role);
   }
 
   updateRole(id: string, role: Role): Observable<Role> {
-    return this.http.put<Role>(`${this.apiUrl}/${id}`, role);
+    return this.http.put<Role>(`${this.apiUrl}/roles/${id}`, role);
   }
 
   deleteRole(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/roles/${id}`);
   }
 
-  isRoleAssignedToUsers(id: string): Observable<boolean> {
-    return this.http.get<User[]>(`${this.apiUrl}/${id}/users`).pipe(
-      map(users => users.length > 0)
+  isRoleAssignedToUsers(roleId: string): Observable<boolean> {
+    return this.http.get<User[]>(`${this.apiUrl}/users`).pipe(
+      map(users => users.some(user => user.roleId === roleId))
     );
   }
 

@@ -26,3 +26,7 @@ mat-spinner {
   display: inline-block;
   margin-right: 8px;
 }
+
+.card-title-spacing {
+  margin-bottom: 20px;
+}

@@ -3,7 +3,6 @@ export interface User {
     username: string;
     password?: string;
     fullName: string;
-    roles: string[];
     isSuperAdmin: boolean;
-    role?:string;
+    roleId?: string;
   }

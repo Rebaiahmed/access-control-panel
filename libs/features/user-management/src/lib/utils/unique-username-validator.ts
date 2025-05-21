@@ -16,14 +16,12 @@ export function uniqueUsernameValidator(
     if (isEditMode && control.value.toLowerCase() === originalUsername?.toLowerCase()) {
       return of(null);
     }
-
     const userService = inject(UserManagementService);
-
     return timer(500).pipe(
       switchMap(() => userService.getAllUsers().pipe(
         map((users: User[]) => {
           const found = users.some(user => user.username.toLowerCase() === control.value.toLowerCase());
-          return found ? { uniqueUsername: true } : null;
+          return found ? { nonUniqueName: true } : null;
         })
       ))
     );
