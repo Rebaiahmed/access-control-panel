@@ -1,13 +1,13 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "superadmin",
       "password": "admin",
       "role": "superadmin"
     },
-     {
-      "id": 1,
+    {
+      "id": "1",
       "username": "admin",
       "password": "admin",
       "role": "normal"
@@ -15,19 +15,22 @@
   ],
   "roles": [
     {
-      "id": 1,
+      "id": "12",
       "name": "Admin",
-      "permissions": ["create", "edit", "delete"]
+      "permissions": [
+        "create",
+        "edit",
+        "delete"
+      ]
     },
-     {
-      "id": 1,
+    {
+      "id": "10",
       "name": "Admin",
-      "permissions": ["create", "edit", "delete"]
-    },
-     {
-      "id": 1,
-      "name": "Admin",
-      "permissions": ["create", "edit", "delete"]
+      "permissions": [
+        "create",
+        "edit",
+        "delete"
+      ]
     }
   ]
 }

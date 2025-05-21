@@ -71,8 +71,5 @@ export const RoleStore = signalStore(
     },
   })),
   withHooks((state) => ({
-    onInit: () => {
-      //state.loadRoles();
-    },
   }))
 );

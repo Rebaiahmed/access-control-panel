@@ -61,7 +61,6 @@ ngOnInit() {
   onEditRole(role: Role): void {
     const dialogRef = this.dialog.open(RoleModalComponent, {
       width: '500px',
-      // Pass the role data and indicate edit mode
       data: { role: role, isEditMode: true },
     });
   }
@@ -83,7 +82,7 @@ ngOnInit() {
       .subscribe((confirmed: boolean) => {
         if (confirmed) {
           this.roleStore.deleteRole(role.id, role.name)
-            .pipe(takeUntilDestroyed())
+            //.pipe(takeUntilDestroyed())
             .subscribe();
         }
       });

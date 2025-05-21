@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { TableBtn, TableColumn } from './table-definitions.interface';
+import { TableAction, TableBtn, TableColumn } from './table-definitions.interface';
 
 @Component({
   selector: 'lib-table',
@@ -16,14 +16,15 @@ import { TableBtn, TableColumn } from './table-definitions.interface';
 export class TableComponent implements AfterViewInit {
 
   columns = input<TableColumn<any>[]>([]);
-  buttons = input<TableBtn<any>[]>([]);
+  buttons = input<TableAction<any>[]>([]);
   data = input<unknown[]>([]);
   footer = input<string | null>(null);
   pagination = input<number[]>([]);
   pageSize = input(10);
   tableMinWidth = input(500);
 
-  buttonClick = output<[string, any]>();
+  //buttonClick = output<[string, any]>();
+  buttonClick = output<{ actionId: string; element: any }>();
 
   dataSource: MatTableDataSource<any>;
 
@@ -54,6 +55,10 @@ export class TableComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+   executeAction(actionId: string, element: any): void {
+    alert('hehe')
+    this.buttonClick.emit({ actionId, element });
+  }
 
 
 

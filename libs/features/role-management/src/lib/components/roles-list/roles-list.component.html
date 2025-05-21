@@ -3,5 +3,6 @@
       [data]="roles()"
       [columns]="columns"
       [buttons]="buttons"
+      (buttonClick)="handleRoleTableAction($event)"
     ></lib-table>
 </div>

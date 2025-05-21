@@ -1,7 +1,7 @@
 import { ToastService } from '@access-control-panel/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { Component, Inject, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { Permission, Role } from '../../models/role-management';
 import { RoleManagementService } from '../../services/role-management.service';
 import { RoleStore } from '../../store/role.store';
 import { uniqueRoleNameValidator } from '../../utils/custom-validator';
+import { catchError, map, Observable, of, switchMap, timer } from 'rxjs';
 
 @Component({
   selector: 'lib-role-modal',
@@ -39,9 +40,9 @@ export class RoleModalComponent implements OnInit  {
   availablePermissions: Permission[] = this.roleService.getPermissions();
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { role?: Role; isEdit: boolean },
+    @Inject(MAT_DIALOG_DATA) public data: { role?: Role; isEditMode: boolean },
   ) {
-    this.isEditMode = data.isEdit;
+    this.isEditMode = data.isEditMode;
     this.title = this.isEditMode ? 'Edit Role' : 'Create New Role';
   }
 
@@ -78,6 +79,21 @@ export class RoleModalComponent implements OnInit  {
   isPermissionSelected(permissionValue: string): boolean {
     const currentPermissions = this.roleForm.get('permissions')?.value || [];
     return currentPermissions.includes(permissionValue);
+  }
+
+   roleNameValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.value) {
+        return of(null);
+      }
+      return timer(500).pipe( 
+        switchMap(() => this.roleService.checkRoleNameExists(control.value)),
+        map(exists => {
+          // If role exists, return { roleExists: true } error, otherwise null
+          return exists ? { roleExists: true } : null;
+        }),
+      );
+    };
   }
 
   onSaveRole(): void {

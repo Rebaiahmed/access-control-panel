@@ -1,16 +1,17 @@
 <div class="role-management-container">
   <div class="header-section">
     <h2 class="header-title">Role Management</h2>
-  <!--   <div class="button-container">
+   <div class="button-container">
       <button mat-raised-button color="primary">
         <mat-icon>add</mat-icon> Create New Role
       </button>
-    </div> -->
+    </div>
   </div>
   <div class="list-section">
     <lib-roles-list
       [roles]="roles()"
       (deleteRole)="onDeleteRole($event)"
+      (editRole)="onEditRole($event)"
     ></lib-roles-list>
   </div>
 </div>
