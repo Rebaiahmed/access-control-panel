@@ -1,1 +1,16 @@
-<p>UserManagement works!</p>
+<div class="user-management-container">
+  <div class="header">
+    <h2>User Management</h2>
+    <button mat-flat-button color="primary" (click)="onCreateUser()">
+      <mat-icon>add</mat-icon> Add New User
+    </button>
+  </div>
+
+  <div class="list-container">
+    <lib-user-management-list
+      [users]="users()"
+      (editUser)="onEditUser($event)"
+      (deleteUser)="onDeleteUser($event)"
+    ></lib-user-management-list>
+  </div>
+</div>

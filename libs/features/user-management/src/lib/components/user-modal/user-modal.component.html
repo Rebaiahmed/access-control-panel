@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="userForm" class="user-form">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        formControlName="username"
+        placeholder="Username"
+        [readonly]="isEditMode"
+      />
+      @if (userForm.get('username')?.hasError('required') && userForm.get('username')?.touched) {
+        <mat-error>Username is required.</mat-error>
+      }
+      @if (userForm.get('username')?.hasError('minlength') && userForm.get('username')?.touched) {
+        <mat-error>Username must be at least 3 characters.</mat-error>
+      }
+      @if (userForm.get('username')?.pending) {
+        <mat-error>Checking uniqueness...</mat-error>
+      }
+      @if (userForm.get('username')?.hasError('uniqueUsername') && userForm.get('username')?.touched) {
+        <mat-error>This username is already taken.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        formControlName="password"
+        placeholder="Password"
+      />
+      @if (userForm.get('password')?.hasError('required') && userForm.get('password')?.touched) {
+        <mat-error>Password is required.</mat-error>
+      }
+      @if (userForm.get('password')?.hasError('minlength') && userForm.get('password')?.touched) {
+        <mat-error>Password must be at least 6 characters.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Full Name</mat-label>
+      <input
+        matInput
+        formControlName="fullName"
+        placeholder="Full Name"
+      />
+      @if (userForm.get('fullName')?.hasError('required') && userForm.get('fullName')?.touched) {
+        <mat-error>Full Name is required.</mat-error>
+      }
+      @if (userForm.get('fullName')?.hasError('minlength') && userForm.get('fullName')?.touched) {
+        <mat-error>Full Name must be at least 3 characters.</mat-error>
+      }
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSaveUser()"
+    [disabled]="userForm.invalid"
+  >
+    {{ isEditMode ? 'Update' : 'Create' }}
+  </button>
+</mat-dialog-actions>

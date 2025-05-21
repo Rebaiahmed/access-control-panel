@@ -1,0 +1,8 @@
+<div>
+  <lib-table
+    [data]="users()"
+    [columns]="columns"
+    [buttons]="buttons"
+    (buttonClick)="handleUserTableAction($event)"
+  ></lib-table>
+</div>

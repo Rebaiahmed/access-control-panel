@@ -1,14 +1,12 @@
 import { Component, inject, ViewChild } from '@angular/core';
-
-import { MatSidenav } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { RouterModule } from '@angular/router';
+import { AuthStore } from '@access-control-panel/authentication';
 import { CommonModule } from '@angular/common';
-import { AuthService, AuthStore } from '@access-control-panel/authentication';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lib-sidebar',

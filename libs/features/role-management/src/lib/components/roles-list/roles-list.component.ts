@@ -32,14 +32,13 @@ roles = input.required<Role[]>();
 
   buttons: TableAction<Role>[] = [
     {
-        actionId: 'edit', // Unique identifier for the edit action
+        actionId: 'edit',
         icon: 'edit',
-        tooltip: 'Edit Role', // Add tooltip for better UX
+        tooltip: 'Edit Role',
         color: 'primary',
-        // No onClick function here anymore!
       },
       {
-        actionId: 'delete', // Unique identifier for the delete action
+        actionId: 'delete',
         icon: 'delete',
         tooltip: 'Delete Role',
         color: 'warn',

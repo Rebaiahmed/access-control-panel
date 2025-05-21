@@ -1,16 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { LoginCredentials } from '../../models/auth.model';
 import { AuthService } from '../../services/auth.service';
 import { AuthStore } from '../../services/auth.store.service';
-import { LoginCredentials } from '../../models/auth.model';
 
 
 @Component({
@@ -50,7 +49,6 @@ export class LoginComponent {
       const credentials: LoginCredentials = this.loginForm.value;
       this.authStore.login(credentials);
     } else {
-      // Mark all fields as touched to display validation errors
       this.loginForm.markAllAsTouched();
     }
   }
