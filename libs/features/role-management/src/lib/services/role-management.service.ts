@@ -1,8 +1,8 @@
-import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, delay, map, Observable, throwError } from 'rxjs';
-import { Permission, Role } from '../models/role-management';
 import { User } from '@access-control-panel/user-management';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { delay, map, Observable } from 'rxjs';
+import { Permission, Role } from '../models/role-management';
 
 @Injectable({
   providedIn: 'root'

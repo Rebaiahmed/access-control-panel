@@ -28,7 +28,7 @@
         <div class="button-container">
           <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
             @if (isLoading) {
-              here spinner component
+              <lib-spinner></lib-spinner>
             } @else {
               <span>Login</span>
             }
@@ -36,7 +36,7 @@
         </div>
 
         @if (authStore.error()) {
-          <p class="error-message mat-caption">{{ authStore.error() }}</p>
+          <p class="error-message">{{ authStore.error() }}</p>
         }
       </form>
     </mat-card-content>

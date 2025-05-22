@@ -5,3 +5,6 @@ export * from '../layout/navbar/navbar.component';
 export * from '../generic/table/table.component';
 export * from  '../generic/table/table-definitions.interface';
 export * from '../generic/confirmation-dialog/confirmation-dialog.component';
+export * from '../generic/spinner/spinner.component'
+
+export * from '../../constants/constants';

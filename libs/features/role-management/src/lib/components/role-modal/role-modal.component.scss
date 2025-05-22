@@ -1,3 +1,7 @@
 .dialog-title-spacing {
   margin-bottom: 20px;
 }
+
+mat-form-field:has(input[readonly]) {
+  margin-top: 16px;
+}

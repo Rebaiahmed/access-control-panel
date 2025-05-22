@@ -56,6 +56,11 @@
           "id": "users.delete",
           "name": "Delete Users",
           "description": "Allows deleting users"
+        },
+        {
+          "id": "users.create",
+          "name": "Create Users",
+          "description": "Allows creating new users"
         }
       ]
     }

@@ -35,7 +35,6 @@ export const AuthStore = signalStore(
     currentUser: computed(() => state.user()),
     authenticated: computed(() => state.isAuthenticated()),
     isSuperAdmin: computed(() => state.user()?.isSuperAdmin || false),
-
   })),
   withMethods((state, authService = inject(AuthService),roleService=inject(RoleManagementService) ,router = inject(Router)) => ({
      login: rxMethod<LoginCredentials>(

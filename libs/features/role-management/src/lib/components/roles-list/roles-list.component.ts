@@ -26,7 +26,7 @@ roles = input.required<Role[]>();
     {
       columnDef: 'permissions',
       header: 'Permissions',
-      cell: (role: Role) => role.permissions.join(', '),
+      cell: (role: Role) => role.permissions.map(p => p.name).join(', '),
     },
   ];
 

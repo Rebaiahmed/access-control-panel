@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,14 +19,14 @@ import { ConfirmationDialogComponent } from '@access-control-panel/ui';
 import { filter, Observable, of, switchMap } from 'rxjs';
 import { ToastService } from '@access-control-panel/core';
 
-
 export const DELETE_ROLE_DIALOG = {
   width: '350px',
-  message: (roleName: string) => `Are you sure you want to delete role "${roleName}"?`,
+  message: (roleName: string) =>
+    `Are you sure you want to delete role "${roleName}"?`,
   buttons: {
     confirm: 'Delete',
-    cancel: 'Cancel'
-  }
+    cancel: 'Cancel',
+  },
 };
 
 @Component({
@@ -30,33 +36,34 @@ export const DELETE_ROLE_DIALOG = {
     MatIconModule,
     MatDialogModule,
     RolesListComponent,
-    MatButtonModule
-],
+    MatButtonModule,
+  ],
   templateUrl: './role-management.component.html',
   styleUrl: './role-management.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoleManagementComponent implements OnInit {
   private roleService = inject(RoleManagementService);
   private dialog = inject(MatDialog);
-   private destroyRef = inject(DestroyRef);
-  roleStore = inject(RoleStore);
-  toastService = inject(ToastService)
+  private destroyRef = inject(DestroyRef);
+  private roleStore = inject(RoleStore);
+  private toastService = inject(ToastService);
   roles = this.roleStore.roles;
 
-ngOnInit() {
-  this.roleStore.loadRoles();
-}
+  ngOnInit() {
+    this.roleStore.loadRoles();
+  }
 
   onCreateRole(): void {
-   const dialogRef = this.dialog.open(RoleModalComponent, {
+    const dialogRef = this.dialog.open(RoleModalComponent, {
       width: '450px',
       height: '450px',
       data: { isEditMode: false },
     });
-    dialogRef.afterClosed()
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe();
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 
   onEditRole(role: Role): void {
@@ -67,19 +74,27 @@ ngOnInit() {
   }
 
   onDeleteRole(role: Role): void {
-    this.roleService.isRoleAssignedToUsers(role.id)
+    this.roleService
+      .isRoleAssignedToUsers(role.id)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        switchMap(isAssigned => this._handleRoleAssignmentCheck(isAssigned, role)),
-        filter(confirmed => confirmed === true),
+        switchMap((isAssigned) =>
+          this._handleRoleAssignmentCheck(isAssigned, role)
+        ),
+        filter((confirmed) => confirmed === true),
         switchMap(() => this._performRoleDeletion(role))
       )
       .subscribe();
   }
 
-  private _handleRoleAssignmentCheck(isAssigned: boolean, role: Role): Observable<boolean | null> {
+  private _handleRoleAssignmentCheck(
+    isAssigned: boolean,
+    role: Role
+  ): Observable<boolean | null> {
     if (isAssigned) {
-      this.toastService.error(`Cannot delete role '${role.name}' as it is assigned to users.`);
+      this.toastService.error(
+        `Cannot delete role '${role.name}' as it is assigned to users.`
+      );
       return of(null);
     } else {
       return this._openDeleteConfirmationDialog(role);
@@ -93,9 +108,9 @@ ngOnInit() {
         message: DELETE_ROLE_DIALOG.message(role.name),
         buttonText: {
           ok: DELETE_ROLE_DIALOG.buttons.confirm,
-          cancel: DELETE_ROLE_DIALOG.buttons.cancel
-        }
-      }
+          cancel: DELETE_ROLE_DIALOG.buttons.cancel,
+        },
+      },
     });
     return dialogRef.afterClosed();
   }
@@ -103,5 +118,4 @@ ngOnInit() {
   private _performRoleDeletion(role: Role): Observable<any> {
     return this.roleStore.deleteRole(role.id, role.name);
   }
-  }
-
+}

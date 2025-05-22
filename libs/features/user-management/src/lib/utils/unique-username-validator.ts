@@ -1,8 +1,7 @@
 import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
-import { inject } from '@angular/core';
 import { map, Observable, of, switchMap, timer } from 'rxjs';
-import { UserManagementService } from '../services/user-management.service'; // Adjust path // Adjust path
 import { User } from '../models/user-management.model';
+import { UserManagementService } from '../services/user-management.service';
 
 export function uniqueUsernameValidator(
   isEditMode: boolean,

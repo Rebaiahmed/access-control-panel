@@ -6,10 +6,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Router } from '@angular/router';
 import { LoginCredentials } from '../../models/auth.model';
-import { AuthService } from '../../services/auth.service';
 import { AuthStore } from '../../services/auth.store.service';
+import { SpinnerComponent } from '@access-control-panel/ui';
 
 
 @Component({
@@ -22,7 +21,8 @@ import { AuthStore } from '../../services/auth.store.service';
     MatCardModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    SpinnerComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -30,10 +30,9 @@ import { AuthStore } from '../../services/auth.store.service';
 export class LoginComponent {
 
   private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
   authStore = inject(AuthStore);
-  private router = inject(Router);
   loginForm: FormGroup;
+   isLoading = false;
   constructor() {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -42,7 +41,7 @@ export class LoginComponent {
 
   }
 
-  isLoading = false;
+ 
 
   onSubmit() {
     if (this.loginForm.valid) {

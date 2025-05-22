@@ -16,13 +16,11 @@ export class AuthService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000';
 
-  constructor() {
-  }
   login(credentials: LoginCredentials): Observable<LoginResponse> {
     return this.http.get<User[]>(`${this.apiUrl}/users`).pipe(
       switchMap((users: User[]) => {
         const foundUser = users.find(
-          (u) => u.username === credentials.username && (u as any).password === credentials.password
+          (u) => u.username === credentials.username && u.password === credentials.password
         );
         if (foundUser) {
           const generatedToken = JwtUtils.generateFrontendToken({
@@ -39,10 +37,6 @@ export class AuthService {
         }
       })
     );
-  }
-
-  isAuthenticated(): boolean {
-    return true;
   }
 
 
@@ -63,10 +57,7 @@ export class AuthService {
     return JwtUtils.getToken();
   }
 
-  validateToken(token: string) 
-    {
-      return of(null);
-    }
+  
 
 
 }

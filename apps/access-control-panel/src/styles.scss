@@ -1,14 +1,8 @@
 @use '@angular/material' as mat; // Make sure this is at the top of your Sass file
-
-// Include the base styles for Angular Material. This should only be included once.
 @include mat.core();
-
-// Define your primary, accent, and warn palettes using m2-define-palette
 $primary-palette: mat.m2-define-palette(mat.$m2-indigo-palette);
 $accent-palette: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400); // Example with custom hues
 $warn-palette: mat.m2-define-palette(mat.$m2-red-palette);
-
-// Define your theme using m2-define-light-theme or m2-define-dark-theme
 $my-app-theme: mat.m2-define-light-theme((
   color: (
     primary: $primary-palette,
@@ -23,4 +17,10 @@ $my-app-theme: mat.m2-define-light-theme((
 
 mat-form-field {
   width: 100%;
+}
+.error-message {
+  color: #f44336;
+  font-weight: 500;
+  margin-top: 8px;
+  text-align: center;
 }

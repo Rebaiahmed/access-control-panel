@@ -1,22 +1,21 @@
-import { Component, inject, Inject, OnInit } from '@angular/core';
+import { RoleStore } from '@access-control-panel/role-management';
 import { CommonModule } from '@angular/common';
+import { Component, inject, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { uniqueUsernameValidator } from '../../utils/unique-username-validator';
-import { ToastService } from '@access-control-panel/core';
-import { UserManagementService } from '../../services/user-management.service';
-import { UserStore } from '../../store/user.store';
 import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { User } from '../../models/user-management.model';
-import { RoleStore } from '@access-control-panel/role-management';
+import { UserManagementService } from '../../services/user-management.service';
+import { UserStore } from '../../store/user.store';
+import { uniqueUsernameValidator } from '../../utils/unique-username-validator';
 
 @Component({
   selector: 'lib-user-modal',
@@ -38,7 +37,6 @@ export class UserModalComponent implements OnInit {
   private userService = inject(UserManagementService);
   private userStore = inject(UserStore);
   private roleStore = inject(RoleStore);
-  private toastService = inject(ToastService);
 
   userForm!: FormGroup;
   isEditMode = false;
@@ -77,11 +75,6 @@ export class UserModalComponent implements OnInit {
         [Validators.required]
       ]
     });
-
-   /*  if (this.isEditMode) {
-      this.userForm.get('password')?.clearValidators();
-      this.userForm.get('password')?.updateValueAndValidity();
-    } */
   }
 
   private handleCreateUser(userPayload: Partial<User>): void {

@@ -31,11 +31,10 @@ export const DELETE_USER_DIALOG = {
 })
 export class UserManagementComponent implements OnInit {
 
- private userService = inject(UserManagementService);
   private dialog = inject(MatDialog);
   private destroyRef = inject(DestroyRef);
   userStore = inject(UserStore);
- readonly users: Signal<User[]> = this.userStore.users;
+  readonly users: Signal<User[]> = this.userStore.users;
 
  ngOnInit() {
   this.userStore.loadUsers();
@@ -44,14 +43,12 @@ export class UserManagementComponent implements OnInit {
   onCreateUser(): void {
     const dialogRef = this.dialog.open(UserModalComponent, {
       width: '450px',
-      height: '450px',
+      height: '550px',
       data: { isEditMode: false },
     });
     dialogRef.afterClosed()
     .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe((actionWasSuccessful: boolean) => {
-      // UserStore's createUser method already updates the 'users' signal
-    });
+    .subscribe();
   }
 
    onEditUser(user: User): void {
@@ -59,11 +56,6 @@ export class UserManagementComponent implements OnInit {
       width: '450px',
       height: '450px',
       data: { user: user, isEditMode: true },
-    });
-    dialogRef.afterClosed()
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe((actionWasSuccessful: boolean) => {
-      // UserStore's updateUser method already updates the 'users' signal
     });
   }
 

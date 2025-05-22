@@ -1,10 +1,10 @@
+import { ToastService } from '@access-control-panel/core';
 import { computed, inject } from '@angular/core';
-import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
-import { catchError, Observable, pipe, switchMap, tap, throwError } from 'rxjs';
+import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { catchError, Observable, pipe, switchMap, tap, throwError } from 'rxjs';
 import { Role } from '../models/role-management';
 import { RoleManagementService } from '../services/role-management.service';
-import { ToastService } from '@access-control-panel/core';
 
 export interface RoleState {
   roles: Role[];
@@ -66,11 +66,15 @@ export const RoleStore = signalStore(
     deleteRole(id: string, roleName: string) {
       return roleService.deleteRole(id).pipe(
         tap(() => {
-        patchState(state, (s) => ({
+          patchState(state, (s) => ({
             roles: s.roles.filter((r: Role) => r.id !== id),
           }));
           toastService.success(`Role '${roleName}' deleted successfully!`);
         }),
+        catchError((error) => {
+          toastService.error(`Failed to delete role '${roleName}'. Please try again.`);
+          return throwError(() => error);
+        })
       );
     },
 
@@ -78,6 +82,4 @@ export const RoleStore = signalStore(
       return roleService.isRoleAssignedToUsers(id);
     },
   })),
-  withHooks((state) => ({
-  }))
 );
