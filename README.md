@@ -34,7 +34,7 @@ This application is built with a focus on modern Angular practices and principle
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/access-control-panel.git](https://github.com/your-username/access-control-panel.git)
+    git clone [https://github.com/Rebaiahmed/access-control-panel](https://github.com/Rebaiahmed/access-control-panel)
     cd access-control-panel
     ```
 
@@ -51,10 +51,3 @@ This application is built with a focus on modern Angular practices and principle
     * The backend API will be available at `http://localhost:3000`.
     * The Angular application will launch at `http://localhost:4200`.
 
-### Docker Setup and Run
-
-Ensure you have your `Dockerfile.frontend`, `Dockerfile.backend`, and `docker-compose.yml` files in your project's root directory.
-
-In your project root, execute:
-```bash
-docker-compose up --build
