@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { User } from '../../models/user-management.model';
 import { Router } from '@angular/router';
+import { AuthStore } from '@access-control-panel/authentication';
 @Component({
   selector: 'lib-user-management-list',
   imports: [CommonModule,TableComponent, MatButtonModule, MatIconModule],
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class UserManagementListComponent {
    private router = inject(Router);
+   private authStore = inject(AuthStore);
 
 users = input.required<User[]>();
   editUser = output<User>();
@@ -37,20 +39,22 @@ users = input.required<User[]>();
         icon: 'edit',
         tooltip: 'Edit User',
         color: 'primary',
-        disabled: (user: User) => user.isSuperAdmin,
+         disabled: (user: User) => user.isSuperAdmin || !this.authStore.hasPermission('users.edit'),
       },
       {
         actionId: 'delete',
         icon: 'delete',
         tooltip: 'Delete User',
         color: 'warn',
-        disabled: (user: User) => user.isSuperAdmin,
+              disabled: (user: User) => user.isSuperAdmin || !this.authStore.hasPermission('users.delete'),
+
       },
       {
       actionId: 'view',
       icon: 'visibility',
       tooltip: 'View User Details',
-      color: 'accent', 
+      color: 'accent',
+      disabled: () => !this.authStore.hasPermission('users.view'), 
     },
   ];
 

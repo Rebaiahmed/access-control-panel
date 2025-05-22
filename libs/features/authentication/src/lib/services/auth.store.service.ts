@@ -3,10 +3,10 @@ import { computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, EMPTY, pipe, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, map, of, pipe, switchMap, tap } from 'rxjs';
 import { LoginCredentials, USER_ROLES } from '../models/auth.model';
 import { AuthService } from './auth.service';
-import { Role } from '@access-control-panel/role-management';
+import { Role, RoleManagementService } from '@access-control-panel/role-management';
 
 
 export interface AuthState {
@@ -37,28 +37,39 @@ export const AuthStore = signalStore(
     isSuperAdmin: computed(() => state.user()?.isSuperAdmin || false),
 
   })),
-  withMethods((state, authService = inject(AuthService),router = inject(Router)) => ({
-    login: rxMethod<LoginCredentials>(
+  withMethods((state, authService = inject(AuthService),roleService=inject(RoleManagementService) ,router = inject(Router)) => ({
+     login: rxMethod<LoginCredentials>(
       pipe(
         tap(() => patchState(state, { isLoading: true, error: null })),
-        switchMap((credentials) => 
+        switchMap((credentials) =>
           authService.login(credentials).pipe(
-            tap(({ user, token }) => {
+            switchMap(({ user, token }) => {
+              if (user.roleId) {
+                return roleService.getRoleById(user.roleId).pipe(
+                  map(role => ({ user, token, role })),
+                  catchError(roleError => {
+                    return of({ user, token, role: null });
+                  })
+                );
+              } else {
+                return of({ user, token, role: null });
+              }
+            }),
+            tap(({ user, token, role }) => {
               patchState(state, {
                 user,
                 token,
                 isAuthenticated: true,
-                isLoading: false
+                isLoading: false,
+                userRole: role
               });
-              
-              // Store token in localStorage
               authService.saveToken(token);
               router.navigate(['/home']);
             }),
             catchError((error) => {
-              patchState(state, { 
+              patchState(state, {
                 error: error.message || 'Login failed',
-                isLoading: false 
+                isLoading: false
               });
               return EMPTY;
             })

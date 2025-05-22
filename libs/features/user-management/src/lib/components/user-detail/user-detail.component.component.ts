@@ -39,7 +39,7 @@ export class UserDetailComponentComponent implements OnInit {
   isLoading = signal(true);
   error = signal<string | undefined>(undefined);
 
-    ngOnInit(): void {
+  ngOnInit(): void {
      this.route.paramMap
       .pipe(
         map(params => params.get('id')),

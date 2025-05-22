@@ -56,6 +56,10 @@ export const RoleStore = signalStore(
           }));
           toastService.success(`Role '${updatedRole.name}' updated successfully!`);
         }),
+        catchError((error) => {
+          toastService.error(`Failed to update role '${role.name}'. Please try again.`);
+          return throwError(() => error);
+        })
       );
     },
 

@@ -38,7 +38,6 @@ export class UserModalComponent implements OnInit {
   private userService = inject(UserManagementService);
   private userStore = inject(UserStore);
   private roleStore = inject(RoleStore);
-
   private toastService = inject(ToastService);
 
   userForm!: FormGroup;
@@ -55,6 +54,7 @@ export class UserModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.roleStore.loadRoles();
   }
 
   initForm(): void {
@@ -62,15 +62,15 @@ export class UserModalComponent implements OnInit {
       username: [
         { value: this.data.user?.username || '', disabled: this.isEditMode },
         [Validators.required, Validators.minLength(3)],
-        [uniqueUsernameValidator(this.isEditMode, this.data.user?.username)],
+        [uniqueUsernameValidator(this.isEditMode,this.userService, this.data.user?.username)],
       ],
-      password: [
-        '',
-        this.isEditMode ? [] : [Validators.required, Validators.minLength(6)],
+       password: [
+        this.data.user?.password || '',
+        this.isEditMode ? [] : [Validators.required, Validators.minLength(3)],
       ],
       fullName: [
         this.data.user?.fullName || '',
-        [Validators.required, Validators.minLength(3)],
+        [Validators.minLength(3)],
       ],
        roleId: [
         this.data.user?.roleId || '',
@@ -78,10 +78,10 @@ export class UserModalComponent implements OnInit {
       ]
     });
 
-    if (this.isEditMode) {
+   /*  if (this.isEditMode) {
       this.userForm.get('password')?.clearValidators();
       this.userForm.get('password')?.updateValueAndValidity();
-    }
+    } */
   }
 
   private handleCreateUser(userPayload: Partial<User>): void {
@@ -112,8 +112,10 @@ export class UserModalComponent implements OnInit {
     }
 
     const userPayload: Partial<User> = {
+      id: this.isEditMode ? this.data.user!.id : crypto.randomUUID(),
       username: this.userForm.get('username')?.value,
       fullName: this.userForm.get('fullName')?.value,
+      roleId: this.userForm.get('roleId')?.value,
       ...(this.userForm.get('password')?.value && {
         password: this.userForm.get('password')?.value,
       }),

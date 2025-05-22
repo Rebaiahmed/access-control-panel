@@ -6,7 +6,8 @@ import { User } from '../models/user-management.model';
 
 export function uniqueUsernameValidator(
   isEditMode: boolean,
-  originalUsername?: string
+  userService: UserManagementService,
+  originalUsername?: string,
 ): AsyncValidatorFn {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
     if (!control.value) {
@@ -16,7 +17,6 @@ export function uniqueUsernameValidator(
     if (isEditMode && control.value.toLowerCase() === originalUsername?.toLowerCase()) {
       return of(null);
     }
-    const userService = inject(UserManagementService);
     return timer(500).pipe(
       switchMap(() => userService.getAllUsers().pipe(
         map((users: User[]) => {

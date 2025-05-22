@@ -57,30 +57,30 @@ export class RoleModalComponent implements OnInit {
   }
 
   onPermissionChange(
-    event: MatCheckboxChange,
-    permissionValue: Permission
-  ): void {
-    const currentPermissions = this.roleForm.get('permissions')?.value || [];
-    if (event.checked) {
-      if (!currentPermissions.includes(permissionValue)) {
-        this.roleForm
-          .get('permissions')
-          ?.setValue([...currentPermissions, permissionValue]);
-      }
-    } else {
+  event: MatCheckboxChange,
+  permissionValue: Permission
+): void {
+  const currentPermissions: Permission[] = this.roleForm.get('permissions')?.value || [];
+
+  if (event.checked) {
+    if (!currentPermissions.some(p => p.id === permissionValue.id)) {
       this.roleForm
         .get('permissions')
-        ?.setValue(
-          currentPermissions.filter((p: Permission) => p !== permissionValue)
-        );
+        ?.setValue([...currentPermissions, permissionValue]);
     }
+  } else {
+    this.roleForm
+      .get('permissions')
+      ?.setValue(
+        currentPermissions.filter((p: Permission) => p.id !== permissionValue.id)
+      );
   }
+}
 
   ngOnInit(): void {
     this.initForm();
   }
   initForm(): void {
-    console.log('permssion',this.data?.role?.permissions)
     const roleNameControl =
       this.isEditMode && this.data.role
         ? { value: this.data.role.name, disabled: true }
@@ -105,14 +105,14 @@ export class RoleModalComponent implements OnInit {
     }
   }
 
-  isPermissionSelected(permissionValue: Permission): boolean {
-    const currentPermissions = this.roleForm.get('permissions')?.value || [];
-    return currentPermissions.includes(permissionValue);
-  }
+ isPermissionSelected(permissionValue: Permission): boolean {
+  const currentPermissions: Permission[] = this.roleForm.get('permissions')?.value || [];
+  return currentPermissions.some(p => p.id === permissionValue.id);
+}
 
   onSaveRole(): void {
     if (this.roleForm.valid) {
-      
+
       const newRole: Role = {
         id: this.isEditMode ? this.data.role!.id : crypto.randomUUID(),
         name: this.roleForm.get('name')?.value,
@@ -120,7 +120,7 @@ export class RoleModalComponent implements OnInit {
       };
 
       if (this.isEditMode) {
-        this.roleStore.updateRole(this.data.role!.id, newRole);
+        this.roleStore.updateRole(this.data.role!.id, newRole).subscribe();
         this.dialogRef.close(newRole);
       } else {
         this.roleStore.createRole(newRole).subscribe();
