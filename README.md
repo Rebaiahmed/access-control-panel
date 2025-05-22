@@ -1,83 +1,60 @@
-# AccessControlPanel
+# Access Control Panel
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+This project is an Angular application demonstrating user and role management with an access control system.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+---
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/tutorials/3-angular-monorepo/1a-introduction/1-welcome?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Technical Architecture
 
-## Finish your remote caching setup
+This application is built with a focus on modern Angular practices and principles for scalable, large-scale applications:
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/uQkp4a3wHM)
+* **Framework:** **Angular 19** (leveraging the latest features and paradigms).
+* **UI Components:** **Angular Material** for a robust and consistent user interface.
+* **Monorepo:** Managed within an **Nx Monorepo** for optimized development workflows, code sharing, and maintainability across multiple applications and libraries.
+* **State Management:** Utilizes **NgRx Signal Store** for reactive, signal-based state management, providing a performant and simplified approach to global state.
+* **Reactivity:** Deeply integrated with **Angular Signals** for fine-grained reactivity and efficient change detection.
+* **Control Flow:** Employs the new built-in template control flow syntax (`@if`, `@for`, `@switch`) for enhanced readability and performance.
+* **Backend Simulation:** A mock REST API is provided by **JSON Server** for local development.
+* **Architecture Principles:** The project adheres to principles of modular design, clear separation of concerns (services, guards, utilities), and comprehensive error handling suitable for enterprise-grade applications.
 
+---
 
-## Run tasks
+## Prerequisites
 
-To run the dev server for your app, use:
+* **Node.js**: `v18` or higher
+* **npm**: Comes with Node.js
+* **Angular CLI**: Install globally via `npm install -g @angular/cli@latest`
+* **json-server**: Install globally via `npm install -g json-server`
 
-```sh
-npx nx serve access-control-panel
-```
+---
 
-To create a production bundle:
+## Getting Started
 
-```sh
-npx nx build access-control-panel
-```
+### Local Setup and Run
 
-To see all available targets to run for a project, run:
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/your-username/access-control-panel.git](https://github.com/your-username/access-control-panel.git)
+    cd access-control-panel
+    ```
 
-```sh
-npx nx show project access-control-panel
-```
+2.  **Install project dependencies:**
+    ```bash
+    npm install
+    ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+3.  **Start the Application (Frontend & Backend):**
+    This command will concurrently start the JSON Server backend and the Angular frontend.
+    ```bash
+    npm start
+    ```
+    * The backend API will be available at `http://localhost:3000`.
+    * The Angular application will launch at `http://localhost:4200`.
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Docker Setup and Run
 
-## Add new projects
+Ensure you have your `Dockerfile.frontend`, `Dockerfile.backend`, and `docker-compose.yml` files in your project's root directory.
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/angular:app demo
-```
-
-To generate a new library, use:
-
-```sh
-npx nx g @nx/angular:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/tutorials/3-angular-monorepo/1a-introduction/1-welcome?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-# access-control-panel
+In your project root, execute:
+```bash
+docker-compose up --build
