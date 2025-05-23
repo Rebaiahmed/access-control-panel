@@ -1,7 +1,8 @@
 <div class="user-management-container">
   <div class="header">
     <h2>User Management</h2>
-    <button mat-flat-button color="primary" (click)="onCreateUser()">
+    <button mat-flat-button color="primary" (click)="onCreateUser()" 
+    [disabled]="!authStore.hasPermission('users.create') && !authStore.isSuperAdmin()">
       <mat-icon>add</mat-icon> Add New User
     </button>
   </div>

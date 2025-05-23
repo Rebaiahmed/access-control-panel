@@ -9,10 +9,17 @@
       "roleId": "1"
     },
     {
-      "id": "5c30cb76-a90f-423d-8c9b-53460535a6c2",
-      "username": "admin",
-      "fullName": "",
-      "roleId": "ed662b13-3287-4576-abc0-087c5b21c5f1",
+      "id": "1f2e4cf7-4668-4237-8a3f-7f233820a9e4",
+      "username": "user-bob",
+      "fullName": "bob.user",
+      "roleId": "cde20b3c-2948-4572-8b2b-7c7748526a26",
+      "password": "admin"
+    },
+    {
+      "id": "93c2a1a7-ea56-4bfc-a8bc-bed45c1b63d0",
+      "username": "user-alice",
+      "fullName": "alice.user",
+      "roleId": "4b4b3d8f-3a87-4120-ae1f-e219ec5251e7",
       "password": "admin"
     }
   ],
@@ -44,8 +51,8 @@
       ]
     },
     {
-      "id": "fe157ca5-3b34-41c9-a5ae-e94062483268",
-      "name": "viewer",
+      "id": "4b4b3d8f-3a87-4120-ae1f-e219ec5251e7",
+      "name": "role-manager",
       "permissions": [
         {
           "id": "users.view",
@@ -53,25 +60,25 @@
           "description": "Allows viewing user lists"
         },
         {
-          "id": "users.delete",
-          "name": "Delete Users",
-          "description": "Allows deleting users"
-        },
-        {
           "id": "users.create",
           "name": "Create Users",
           "description": "Allows creating new users"
-        }
-      ]
-    },
-    {
-      "id": "ed662b13-3287-4576-abc0-087c5b21c5f1",
-      "name": "test",
-      "permissions": [
+        },
         {
           "id": "users.edit",
           "name": "Edit Users",
           "description": "Allows editing existing users"
+        }
+      ]
+    },
+    {
+      "id": "cde20b3c-2948-4572-8b2b-7c7748526a26",
+      "name": "role-auditor",
+      "permissions": [
+        {
+          "id": "users.view",
+          "name": "View Users",
+          "description": "Allows viewing user lists"
         }
       ]
     }

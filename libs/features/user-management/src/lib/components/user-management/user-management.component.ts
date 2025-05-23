@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserManagementService } from '../../services/user-management.service';
 import { UserManagementListComponent } from '../user-management-list/user-management-list.component';
 import { ConfirmationDialogComponent } from '@access-control-panel/ui';
+import { AuthStore } from '@access-control-panel/authentication';
 
 export const DELETE_USER_DIALOG = {
   width: '350px',
@@ -34,6 +35,7 @@ export class UserManagementComponent implements OnInit {
   private dialog = inject(MatDialog);
   private destroyRef = inject(DestroyRef);
   userStore = inject(UserStore);
+  public readonly authStore = inject(AuthStore);
   readonly users: Signal<User[]> = this.userStore.users;
 
  ngOnInit() {
