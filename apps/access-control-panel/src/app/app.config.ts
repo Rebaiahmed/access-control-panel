@@ -5,6 +5,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideHttpClient } from '@angular/common/http';
 import { provideClientHydration } from '@angular/platform-browser';
+import { environment } from '../environments/environment';
+import { API_URL } from '@access-control-panel/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +18,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' }
+    },
+    {
+      provide: API_URL,
+      useValue: environment.apiUrl 
     }
   ]
 };

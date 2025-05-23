@@ -2,13 +2,15 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user-management.model';
 import { HttpClient } from '@angular/common/http';
+import { API_URL } from '@access-control-panel/core';
 @Injectable({
   providedIn: 'root'
 })
 export class UserManagementService {
 
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000';
+  private environmentUrl = inject(API_URL);
+  private apiUrl = `${this.environmentUrl}`;
 
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/users`);

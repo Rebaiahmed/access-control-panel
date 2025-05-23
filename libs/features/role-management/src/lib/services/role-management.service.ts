@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { delay, map, Observable } from 'rxjs';
 import { Permission, Role } from '../models/role-management';
+import { API_URL } from '@access-control-panel/core';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { Permission, Role } from '../models/role-management';
 export class RoleManagementService {
 
    private http = inject(HttpClient);
-    private apiUrl = 'http://localhost:3000';
+  private environmentUrl = inject(API_URL);
+  private apiUrl = `${this.environmentUrl}`;
 
     private ALL_PERMISSIONS: Permission[] = [
     { id: 'users.view', name: 'View Users', description: 'Allows viewing user lists' },
