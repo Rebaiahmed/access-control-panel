@@ -1,5 +1,7 @@
 # Access Control Panel
 
+![ITONICS Logo](https://github.com/Rebaiahmed/access-control-panel/blob/main/apps/access-control-panel/src/assets/itonics.svg)
+
 This project is an Angular application demonstrating user and role management with an access control system.
 
 ---
@@ -34,21 +36,24 @@ This application is built with a focus on modern Angular practices and principle
 ### Local Setup and Run
 
 1.  **Clone the repository:**
+
     ```bash
     git clone [https://github.com/Rebaiahmed/access-control-panel](https://github.com/Rebaiahmed/access-control-panel)
     cd access-control-panel
     ```
-
 2.  **Install project dependencies:**
+
     ```bash
     npm install
     ```
-
 3.  **Start the Application (Frontend & Backend):**
+
     This command will concurrently start the JSON Server backend and the Angular frontend.
+
     ```bash
     npm start
     ```
+
     * The backend API will be available at `http://localhost:3000`.
     * The Angular application will launch at `http://localhost:4200`.
 
@@ -59,12 +64,14 @@ This application is built with a focus on modern Angular practices and principle
 This Angular project uses modern practices to make it scalable and easy to maintain:
 
 * **Modular Nx Monorepo:** I built this project using **Nx** for a highly organized setup. This means:
+
     * **Feature-Based Organization:** I split the app's logic into clear features (like `auth`, `user-management`, `role-management`). This makes it easier to work on and understand.
     * **Reusable Libraries (`libs/`):** I put common code and UI parts into separate libraries. This lets me write code once and use it everywhere, making the app more consistent and faster to build.
 
 * **NgRx Signal Store for State:** I used **NgRx Signal Store** to manage all the app's data. This gives us a clear and central way to handle data, making sure everything is consistent and works smoothly, all while using Angular Signals for great performance.
 
 * **Clean Code Principles:**
+
     * **Single Responsibility:** I designed services so each one does just one specific job (e.g., one service handles user API calls, another handles role API calls).
     * **Injection Tokens for URLs:** I provided API base URLs using **Angular Injection Tokens**, like the `API_URL` token. This keeps my libraries independent and reusable, so they're not directly tied to specific environment settings.
 
