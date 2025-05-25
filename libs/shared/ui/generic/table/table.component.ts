@@ -8,6 +8,13 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TableAction, TableColumn } from './table-definitions.interface';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+/**
+ * @description
+ * A reusable Angular Material table component.
+ * This component handles displaying data in a paginated, sortable table format.
+ * It's designed to be generic and adaptable for various data displays across the app.
+ */
+
 @Component({
   selector: 'lib-table',
   imports: [CommonModule,MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, MatIconModule,

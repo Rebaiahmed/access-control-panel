@@ -5,7 +5,14 @@ import { JwtUtils } from './jwt-utils';
 import { User } from '@access-control-panel/user-management';
 import { Observable, of, switchMap } from 'rxjs';
 import { LoginCredentials, LoginResponse } from '../models/auth.model';
+import { API_URL } from '@access-control-panel/core';
 
+
+/**
+ * @description
+ * Service responsible for user authentication, including login and logout functionalities.
+ * It interacts with the backend for user verification and manages JWTs.
+ */
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +21,8 @@ export class AuthService {
 
   private router = inject(Router);
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000';
+  private environmentUrl = inject(API_URL);
+  private apiUrl = `${this.environmentUrl}`;
 
   login(credentials: LoginCredentials): Observable<LoginResponse> {
     return this.http.get<User[]>(`${this.apiUrl}/users`).pipe(

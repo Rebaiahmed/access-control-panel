@@ -42,6 +42,13 @@ export const DELETE_ROLE_DIALOG = {
   styleUrl: './role-management.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+/**
+ * @description
+ * Main component for managing roles within the application.
+ * It handles listing roles, creating, editing, and deleting roles,
+ * including checks for role assignment before deletion.
+ */
+
 export class RoleManagementComponent implements OnInit {
   private roleService = inject(RoleManagementService);
   private dialog = inject(MatDialog);

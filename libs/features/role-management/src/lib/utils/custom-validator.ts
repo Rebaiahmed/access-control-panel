@@ -2,6 +2,12 @@ import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/fo
 import { catchError, map, Observable, of, switchMap, timer } from 'rxjs';
 import { RoleManagementService } from '../services/role-management.service';
 
+/**
+ * @description
+ * Async validator to check if a role name is unique.
+ * It debounces the check and allows ignoring the original name during edits.
+ */
+
 export function uniqueRoleNameValidator(
    roleService: RoleManagementService,
   originalRoleId?: string

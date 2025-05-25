@@ -3,6 +3,13 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user-management.model';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@access-control-panel/core';
+
+/**
+ * @description
+ * Service responsible for managing user-related data by interacting with the backend API.
+ * It provides methods for fetching lists of users and individual user details.
+ */
+
 @Injectable({
   providedIn: 'root'
 })

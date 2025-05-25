@@ -2,6 +2,12 @@ import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+/**
+ * @description
+ * A reusable Angular Material spinner component.
+ * Displays a customizable loading indicator.
+ */
+
 @Component({
   selector: 'lib-spinner',
   standalone: true,

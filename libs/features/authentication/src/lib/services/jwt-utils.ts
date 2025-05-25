@@ -1,6 +1,9 @@
 export class JwtUtils {
   private static TOKEN_STORAGE_KEY = 'auth_token';
 
+  // Utility class for handling basic JWT (JSON Web Token) operations on the frontend.
+  // This includes generating mock tokens and managing their storage.
+
   static generateFrontendToken(payload: Record<string, any>): string {
     const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
     const encodedPayload = btoa(JSON.stringify(payload));

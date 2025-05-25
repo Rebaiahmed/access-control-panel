@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+
+/**
+ * @description
+ * Service for displaying various types of toast notifications (success, error, info, warning)
+ * across the application, providing consistent messaging and styling.
+ */
+
 @Injectable({
   providedIn: 'root'
 })

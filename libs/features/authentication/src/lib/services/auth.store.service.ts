@@ -28,6 +28,12 @@ const initialState: AuthState = {
 };
 
 
+/**
+ * @description
+ * Manages the application's authentication state using NgRx Signal Store.
+ * It handles user login, logout, and provides computed properties for authentication status and user roles/permissions.
+ */
+
 export const AuthStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),

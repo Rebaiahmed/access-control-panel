@@ -15,9 +15,21 @@ $my-app-theme: mat.m2-define-light-theme((
 
 @include mat.all-component-themes($my-app-theme);
 
+/*
+  Ensures that form input containers (like text fields, selects, etc.)
+  always take up the full available width of their parent.
+  This is common for creating responsive and uniformly sized forms.
+*/
+
 mat-form-field {
   width: 100%;
 }
+
+/*
+  Defines a reusable styling class for displaying error messages.
+  This can be applied to any text element that needs to signal an error
+  (e.g., form validation feedback, status messages).
+*/
 .error-message {
   color: #f44336;
   font-weight: 500;

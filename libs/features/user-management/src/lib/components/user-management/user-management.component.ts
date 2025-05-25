@@ -1,16 +1,15 @@
-import { Component, DestroyRef, inject, OnInit, Signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UserStore } from '../../store/user.store';
-import { UserModalComponent } from '../user-modal/user-modal.component';
-import { User } from '../../models/user-management.model';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { UserManagementService } from '../../services/user-management.service';
-import { UserManagementListComponent } from '../user-management-list/user-management-list.component';
-import { ConfirmationDialogComponent } from '@access-control-panel/ui';
 import { AuthStore } from '@access-control-panel/authentication';
+import { ConfirmationDialogComponent } from '@access-control-panel/ui';
+import { CommonModule } from '@angular/common';
+import { Component, DestroyRef, inject, OnInit, Signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { User } from '../../models/user-management.model';
+import { UserStore } from '../../store/user.store';
+import { UserManagementListComponent } from '../user-management-list/user-management-list.component';
+import { UserModalComponent } from '../user-modal/user-modal.component';
 
 export const DELETE_USER_DIALOG = {
   width: '350px',
@@ -20,6 +19,14 @@ export const DELETE_USER_DIALOG = {
     cancel: 'Cancel'
   }
 };
+
+/**
+ * @description
+ * This is the main component for the User Management feature.
+ * It orchestrates user listing, creation, editing, and deletion,
+ * interacting with the UserStore and opening various dialogs.
+ */
+
 @Component({
   selector: 'lib-user-management',
   imports: [ CommonModule,
